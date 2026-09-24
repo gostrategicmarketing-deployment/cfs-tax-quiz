@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Is the Tax Scholarship a Fit for Your Family?</title>
+<meta name="description" content="">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Relative paths throughout (no leading slash), so the folder runs unchanged
+     from a subdirectory on GitHub Pages, a GHL-hosted file, or file:// -->
+<link rel="stylesheet" href="funnel.css">
+
+<!-- Hyros universal script, copied from /li-old so the click is stitched across
+     the hop from this page to the calendar. -->
+<script>
+/* Local previews (localhost, file://) must not send test visits and test
+   emails to Lance's live pixel, GA4, Clarity or Hyros. Add ?track=1 to force
+   tracking on in a local preview. */
+window.FUNNEL_NO_TRACK = /^(localhost|127\.0\.0\.1|)$/.test(location.hostname) &&
+                         !/[?&]track=1/.test(location.search);
+</script>
+<script>
+if (!window.FUNNEL_NO_TRACK) {
+var head = document.head;
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = "https://211336.t.hyros.com/v1/lst/universal-script?ph=d2557963484bbd3fde07d4012f41f1094a35de990b7c147eac002d49f070d24c&tag=!clicked&ref_url=" + encodeURI(document.URL) ;
+head.appendChild(script);
+}
+</script>
+
+<!-- ============ TRACKING ============
+     Every block here is inert until you put an id in funnel.config.js. Leave the
+     ones you do not use exactly as they are: they cost nothing and removing them
+     is how a pixel goes missing three clients later. -->
+<script src="funnel.config.js"></script>
+<script>
+(function () {
+  if (window.FUNNEL_NO_TRACK) { console.info('[funnel] local preview: tracking disabled'); return; }
+  var t = (window.FUNNEL || {}).tracking || {};
+
+  if (t.gtm) {
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':+new Date(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;
+    j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',t.gtm);
+  }
+
+  var gaId = t.ga4 || (t.googleAds && t.googleAds.id) || '';
+  if (gaId) {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    if (t.ga4) gtag('config', t.ga4);
+    if (t.googleAds && t.googleAds.id) gtag('config', t.googleAds.id);
+  }
+
+  if (t.metaPixel) {
+    !function(f,b,e,v,n,t2,s2){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t2=b.createElement(e);t2.async=!0;
+    t2.src=v;s2=b.getElementsByTagName(e)[0];s2.parentNode.insertBefore(t2,s2)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', t.metaPixel); fbq('track', 'PageView');
+  }
+
+  if (t.clarity) {
+    (function(c,l,a,r,i,t3,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t3=l.createElement(r);t3.async=1;t3.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t3,y);
+    })(window,document,"clarity","script",t.clarity);
+  }
+})();
+</script>
+
+<script>
+/* Theme tokens come from the config so there is exactly one place colours live. */
+(function () {
+  var th = ((window.FUNNEL || {}).brand || {}).theme || {};
+  var css = Object.keys(th).map(function (k) {
+    return '--' + k.replace(/[A-Z]/g, function (m) { return '-' + m.toLowerCase(); }) + ':' + th[k];
+  }).join(';');
+  if (css) document.documentElement.setAttribute('style', css);
+  var b = (window.FUNNEL || {}).brand || {};
+  if (b.title) document.title = b.title;
+  if (b.description) {
+    var m = document.querySelector('meta[name=description]');
+    if (m) m.setAttribute('content', b.description);
+  }
+})();
+</script>
+</head>
+
+<body>
+
+<div class="topbar"><img id="brandLogo" alt="College Funding Secrets" width="220" height="44"></div>
+
+<!-- ============ HERO ============
+     The quiz lives INSIDE the hero, so there is no scroll between reading the
+     promise and answering the first question. Three states swap in the panel:
+     quiz, qualified hand-off, not-a-fit hand-off. -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="panel">
+      <div id="heroHead">
+        <h1 id="heroH1"></h1>
+        <p class="sub" id="heroSub"></p>
+        <p class="introNote" id="introNote"></p>
+      </div>
+
+      <section id="quiz" class="quiz" aria-label="Qualifying questions"></section>
+
+      <section id="resOk" class="result" hidden aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <h2></h2>
+        <p></p>
+        <a class="cta" href="#"></a>
+      </section>
+
+      <section id="resDq" class="result" hidden aria-live="polite">
+        <h2></h2>
+        <p></p>
+        <a class="cta" href="#"></a>
+      </section>
+    </div>
+  </div>
+</header>
+
+<!-- ============ SECTIONS ============
+     Rendered from CFG.sections. Order in the config is order on the page. -->
+<div id="sections"></div>
+
+<footer class="foot">
+  <p id="footNote"></p>
+  <p id="footBrand"></p>
+</footer>
+
+<script src="funnel.js"></script>
+<script>
+/* Section rendering. Kept out of funnel.js because this is presentation only. */
+(function () {
+  var CFG = window.FUNNEL, host = document.getElementById('sections');
+  if (!CFG || !host) return;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c];
+    });
+  }
+
+  var build = {
+    /* Press: an outlet logo strip, then the client's own media cards as images.
+       Images, not retyped text, so nothing on the page can drift from what the
+       outlet actually ran. */
+    press: function (s) {
+      var logos = s.logos || [], cards = s.cards || [];
+      if (!logos.length && !cards.length) return '';
+      return '<section class="sec press"><div class="inner">' +
+        (s.title ? '<p class="eyebrow">' + esc(s.title) + '</p>' : '') +
+        (logos.length ? '<div class="logos">' + logos.map(function (l) {
+          return '<img src="' + esc(l.src) + '" alt="' + esc(l.alt) + '" loading="lazy">';
+        }).join('') + '</div>' : '') +
+        (cards.length ? '<div class="cards">' + cards.map(function (c) {
+          return '<figure class="pcard"><img src="' + esc(c.src) + '" alt="' + esc(c.alt) + '" loading="lazy"></figure>';
+        }).join('') + '</div>' : '') +
+        '</div></section>';
+    },
+    covers: function (s) {
+      return '<section class="sec band"><div class="inner"><h2>' + esc(s.title) + '</h2><div class="grid">' +
+        (s.items || []).map(function (i, n) {
+          return '<div class="cell"><span class="num">' + (n + 1) + '</span><h3>' + esc(i.title) + '</h3><p>' + esc(i.body) + '</p></div>';
+        }).join('') + '</div></div></section>';
+    },
+    proof: function (s) {
+      if (!(s.items || []).length) return '';
+      return '<section class="band sec"><div class="inner"><h2>' + esc(s.title) + '</h2><div class="grid">' +
+        s.items.map(function (i) {
+          return '<blockquote class="cell"><p>' + esc(i.quote) + '</p>' +
+            '<cite>' + esc(i.who || '') + '</cite></blockquote>';
+        }).join('') + '</div></div></section>';
+    },
+    faq: function (s) {
+      return '<section class="sec"><div class="inner narrow"><h2>' + esc(s.title) + '</h2>' +
+        (s.items || []).map(function (i) {
+          return '<details class="faq"><summary>' + esc(i.q) + '</summary><p>' + esc(i.a) + '</p></details>';
+        }).join('') + '</div></section>';
+    },
+    finalcta: function (s) {
+      return '<section class="sec final"><div class="inner"><h2>' + esc(s.title) + '</h2>' +
+        '<p>' + esc(s.body) + '</p>' +
+        '<button class="cta" data-scroll="quiz">' + esc(s.cta || 'Get started') + '</button></div></section>';
+    }
+  };
+
+  host.innerHTML = (CFG.sections || [])
+    .map(function (s) { return build[s.type] ? build[s.type](s) : ''; })
+    .join('');
+
+  /* Re-bind, because these buttons did not exist when funnel.js wired the page. */
+  host.querySelectorAll('[data-scroll="quiz"]').forEach(function (b) {
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('top').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  var logo = document.getElementById('brandLogo');
+  if (logo && CFG.brand.logo) logo.src = CFG.brand.logo;
+  var note = document.getElementById('introNote');
+  if (note && CFG.quiz.intro) note.textContent = CFG.quiz.intro;
+  var fn = document.getElementById('footNote');
+  if (fn && CFG.footer) fn.textContent = CFG.footer;
+  var fb = document.getElementById('footBrand');
+  if (fb) fb.textContent = '© ' + new Date().getFullYear() + ' College Funding Education, LLC';
+
+  var left = (document.body.textContent.match(/\[(CLAIM|NAME|PROOF|HEADING|ANSWER|ONE SENTENCE|RATING|PLATFORM|COUNT)[^\]]*\]/g) || []);
+  if (left.length) {
+    console.warn('[funnel] ' + left.length + ' unfilled placeholder(s) still on the page: ' + left.slice(0, 6).join(', '));
+  }
+})();
+</script>
+</body>
+</html>
