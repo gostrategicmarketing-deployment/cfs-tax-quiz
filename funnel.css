@@ -75,10 +75,28 @@ p{margin:0}
 }
 .hero h1 .deep{color:var(--navy)}
 .hero h1 .lead-in{display:block}
+/* the reason to take the quiz, then the four pieces as one interlocking strip */
+.hook{margin:10px auto 0;font-size:15.5px;line-height:1.4;font-weight:600;color:var(--ink);max-width:30em;text-wrap:balance}
+.pieces{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.pieces li{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;
+  background:var(--navy);color:var(--white);border-radius:8px;padding:8px 10px 9px;
+  font:600 11.5px/1.2 var(--body);text-align:center;text-wrap:balance;
+}
+.pieces li b{font:800 14px/1 var(--head);color:var(--green)}
+/* the knob that locks each piece into the next */
+.pieces li:not(:last-child)::after{
+  content:"";position:absolute;z-index:1;right:-9px;top:50%;width:13px;height:13px;margin-top:-6.5px;
+  border-radius:50%;background:var(--navy);box-shadow:0 0 0 2px var(--blue);
+}
 .hero .sub{font-size:16px;line-height:1.5;font-weight:500;color:var(--ink);max-width:36em;margin:0 auto;text-wrap:balance}
 .qual{margin-top:12px;font-size:14px;line-height:1.45;font-weight:500;color:var(--ink);text-wrap:balance}
 
 @media(min-width:640px){
+  .hook{font-size:18px;margin-top:14px}
+  .pieces{margin-top:18px;gap:5px}
+  .pieces li{font-size:14px;padding:12px 14px 13px;gap:6px}
+  .pieces li b{font-size:17px}
   .kicker{font-size:14px;padding:7px 14px 7px 10px}
   .hero h1{font-size:clamp(2.05rem,1.25rem + 3.6vw,3.4rem);line-height:1.06;letter-spacing:-.025em;margin-top:16px}
   .hero .sub{font-size:clamp(1.0625rem,1rem + .35vw,1.25rem)}
@@ -91,6 +109,7 @@ p{margin:0}
     grid-template-areas:"top card" "more card";align-items:start;
   }
   .hero-top,.hero-more{text-align:left}
+  .hook{margin-left:0}
   .hero-top{align-self:end}
   .hero .sub{margin:0}
   .qual{display:flex;gap:10px;align-items:flex-start;margin-top:16px}
@@ -173,6 +192,7 @@ p{margin:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
 .cell{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-card);padding:24px}
 .sec.white .cell{background:var(--gray)}
+.grid:has(> .cell:nth-child(4)){grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .cell h3{font-weight:800;font-size:21px;line-height:1.2;color:var(--navy);margin-bottom:8px}
 .cell p{color:var(--ink-2);font-size:16.5px}
 .tag{
@@ -184,6 +204,10 @@ p{margin:0}
   background:var(--green);color:var(--navy);box-shadow:0 0 0 2px var(--navy);
   font:800 16px/1 var(--head);margin-bottom:14px;
 }
+.sec-h.has-lead{margin-bottom:10px}
+.seclead{text-align:center;font-size:18px;font-weight:500;color:var(--ink-2);margin:0 auto 28px;max-width:34em;text-wrap:balance}
+.story p{font-size:18px;line-height:1.6;color:var(--ink-2);text-align:center;text-wrap:pretty}
+.story p + p{margin-top:14px}
 .secnote{text-align:center;color:var(--ink-2);font-size:15px;max-width:44em;margin:22px auto 0}
 
 .press{padding:36px 0;background:var(--white);border-bottom:1px solid var(--line)}
@@ -191,6 +215,7 @@ p{margin:0}
 .logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px 38px}
 .logos img{height:30px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.8}
 
+.press + .sec{border-top:0}
 .faq{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-ctl);padding:0 18px;margin-bottom:10px}
 .faq summary{cursor:pointer;font-weight:600;list-style:none;font-size:17px;color:var(--navy);padding:16px 28px 16px 0;position:relative}
 .faq summary::-webkit-details-marker{display:none}

@@ -2,8 +2,8 @@
 window.FUNNEL = {
   brand: {
     name: 'Legetty',
-    title: '3 Steps to Pay for College Without Sacrificing Your Financial Future',
-    description: 'Answer 6 quick questions to see whether a free 30-minute review call makes sense for your family.'
+    title: 'Paying Full Price for College and Full Price in Taxes?',
+    description: 'Paying for college is a 4-piece puzzle. Take the free quiz to see which pieces matter most for your family.'
   },
   webhook: {
     url: '',
@@ -49,10 +49,10 @@ window.FUNNEL = {
         q: 'aid_concern',
         type: 'choice',
         title: 'Are you concerned that you make too much money to get financial aid?',
-        note: 'Step 1 of the framework looks at what college may really cost your family, including financial aid eligibility.',
+        note: 'Piece 1, college planning, looks at what college may really cost your family, including financial aid eligibility.',
         options: [
           { label: 'Yes, I doubt we will get much aid',     value: 1 },
-          { label: 'I am not sure where we stand',          value: 0 },
+          { label: 'I am not sure where we stand',          value: 0.5 },
           { label: 'No, I expect we will qualify for aid',  value: 0 }
         ]
       },
@@ -60,32 +60,32 @@ window.FUNNEL = {
         q: 'full_price_worry',
         type: 'choice',
         title: 'Are you worried that paying full price for college will hurt your financial future?',
-        note: 'Step 3 is about paying for college without draining the savings and retirement money that should keep compounding for you.',
+        note: 'Pay for college out of savings, and that money stops growing. Piece 4, the long game, is about keeping it working for you.',
         options: [
-          { label: 'Yes, that worries me' },
-          { label: 'Somewhat' },
-          { label: 'No, we have it covered' }
+          { label: 'Yes, that worries me',    value: 1 },
+          { label: 'Somewhat',                value: 0.5 },
+          { label: 'No, we have it covered',  value: 0 }
         ]
       },
       {
         q: 'taxes_vs_college',
         type: 'choice',
         title: 'On top of that, are you paying more in taxes every year than it costs to send your child to college?',
-        note: "Compare your yearly income tax bill with one year of college for one student. Your best guess is fine. Step 2 looks at how tax planning could cover more of the cost, even if you're a W-2 earner.",
+        note: 'Compare your yearly income tax bill with one year of college for one student. Your best guess is fine. Piece 2, tax planning, looks at how it could offset more of the cost, even on a W-2.',
         options: [
           { label: 'Yes, our tax bill is bigger',  value: 1 },
           { label: 'No, our tax bill is smaller',  value: 0 },
-          { label: 'I am not sure',                value: 0 }
+          { label: 'I am not sure',                value: 0.5 }
         ]
       },
       {
         q: 'real_estate',
         type: 'choice',
         title: "Would you like the idea of investing in real estate if it could lower your taxes and help pay for college, and you didn't have to find it, analyze it, design it, or manage it yourself?",
-        note: 'For some families, Step 2 includes real estate they own.',
+        note: 'Piece 3 is real estate you own, as one way tax planning can work.',
         options: [
           { label: 'Yes, I have always wanted to. I just do not have the time.', value: 1 },
-          { label: 'Maybe. I would want to learn more first.',                   value: 1 },
+          { label: 'Maybe. I would want to learn more first.',                   value: 0.5 },
           { label: 'No, real estate is not for me.',                             value: 0 }
         ]
       },
@@ -116,23 +116,29 @@ window.FUNNEL = {
   },
   variants: {
     _default: {
-      h1: '<span class="lead-in">3 Steps to Pay for College</span> <span class="deep">Without Sacrificing Your Financial Future</span>',
-      sub: 'Answer 6 quick questions to see whether a free 30-minute review call makes sense for your family.'
+      h1: '<span class="lead-in">Paying Full Price for College</span> <span class="deep">and Full Price in Taxes?</span>',
+      sub: "One piece alone leaves a gap. Answer 6 quick questions, and if it's a fit, you can book a free 30-minute call where we personalize all four pieces for your family."
     }
   },
   kicker: 'Free 6-question quiz',
+  hook: 'Paying for college is a 4-piece puzzle. Take the quiz to see which pieces matter most for your family.',
+  pieces: ['College planning', 'Tax planning', 'Real estate you own', 'The long game'],
   qualifier: 'This review is for families earning about $250,000+ or paying $30,000+ a year in federal taxes.',
   sections: [
     {
       type: 'steps',
-      title: 'The 3 steps',
+      tag: 'Piece',
+      title: 'Paying for College Is a 4-Piece Puzzle',
+      lead: 'One piece alone leaves a gap. The four work when they fit together.',
       items: [
-        { title: 'Reduce',
-          body: 'Understand what college may really cost your family, including school choice and financial aid eligibility, before you decide how to pay.' },
-        { title: 'Offset',
-          body: "See how strategic tax planning could cover more of what's left, even if you're a W-2 earner. For some families, that includes real estate they own." },
-        { title: 'Fund',
-          body: 'Pay the balance without draining the savings and retirement money that should keep compounding for you.' }
+        { title: 'College planning',
+          body: 'Reduce the true cost of college. Understand what it may really cost your family, including school choice and financial aid eligibility, before you decide how to pay.' },
+        { title: 'Tax planning',
+          body: "Offset the cost with tax planning, even on a W-2. See how it could cover more of what's left." },
+        { title: 'Real estate you own',
+          body: 'One way tax planning can work: real estate you own, like a short-term rental.' },
+        { title: 'The long game',
+          body: 'Fund college without sacrificing long-term wealth, and keep building wealth that lasts for the family.' }
       ]
     },
     {
@@ -149,6 +155,14 @@ window.FUNNEL = {
       ]
     },
     {
+      type: 'story',
+      title: 'Why Lance Built It This Way',
+      body: [
+        'Lance Morgan is a dad of five. He saved in 529s for years and taught his clients to do the same. Then he realized his taxes were a bigger bill than college.',
+        'He says he learned the rest out of desperation more than inspiration. The four-piece puzzle is what came out of it, and his point is simple: the pieces only work when they work together.'
+      ]
+    },
+    {
       type: 'covers',
       title: 'What the free review call covers',
       items: [
@@ -159,7 +173,7 @@ window.FUNNEL = {
         { title: 'Whether a deeper conversation makes sense',
           body: 'You decide together with our team. There is no need to choose a strategy on the call.' }
       ],
-      note: 'This is an exploratory conversation. No tax, legal, investment, or financial outcome is promised.'
+      note: 'The call is where we personalize the four pieces for your family. It is an exploratory conversation. No tax, legal, investment, or financial outcome is promised.'
     },
     {
       type: 'faq',
@@ -173,8 +187,8 @@ window.FUNNEL = {
     },
     {
       type: 'finalcta',
-      title: 'See your next step',
-      body: 'Six quick steps, then you will know whether a review call makes sense for your family.',
+      title: 'See Which Pieces Matter Most for Your Family',
+      body: 'Six quick steps. Under a minute.',
       cta: 'Start the Quiz'
     }
   ]

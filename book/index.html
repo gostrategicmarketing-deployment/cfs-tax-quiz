@@ -846,6 +846,14 @@
   }
   @media (max-width: 639px) { img.cfs-photo { width: 100%; max-width: 360px; } }
   @media (min-width: 980px) { img.cfs-photo { max-width: 420px; } }
+
+  /* quiz hand-off list inside the booking card */
+  .q-pieces { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .q-pieces[hidden] { display: none; }
+  .q-pieces h3 { font-weight: 800; font-size: 17px; line-height: 1.25; color: var(--navy); }
+  .q-pieces ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+  .q-pieces li { font-size: 15.5px; line-height: 1.45; color: var(--ink-2); padding-left: 14px; border-left: 3px solid var(--green); }
+  .q-pieces li b { color: var(--navy); }
 </style>
 </head>
 <body>
@@ -935,6 +943,35 @@
           <li><span class="ck" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Identify whether there may be opportunities worth exploring</li>
           <li><span class="ck" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Decide together whether a deeper strategy conversation makes sense</li>
         </ul>
+        <!-- Quiz hand-off: which of the four pieces to start with, in the visitor's own answers. Hidden unless the
+             quiz ran in this tab. It restates what they said; it promises nothing. -->
+        <div class="q-pieces" id="q-pieces" hidden>
+          <h3>From your quiz answers, we'll start with:</h3>
+          <ul id="q-pieces-list"></ul>
+        </div>
+        <script>
+        (function () {
+          var a = {};
+          try { a = JSON.parse(sessionStorage.getItem('fnl_answers') || '{}') || {}; } catch (e) {}
+          var rows = [];
+          if (a.aid_concern_value === 1) rows.push(['College planning', "You doubt you'll get much aid."]);
+          else if (a.aid_concern_value === 0.5) rows.push(['College planning', "You're not sure where you stand on aid."]);
+          if (a.taxes_vs_college_value === 1) rows.push(['Tax planning', 'Your tax bill is bigger than a year of college.']);
+          if (a.real_estate_value === 1) rows.push(['Real estate you own', "You've always wanted to and don't have the time."]);
+          else if (a.real_estate_value === 0.5) rows.push(['Real estate you own', 'You want to learn more first.']);
+          if (a.full_price_worry_value === 1) rows.push(['The long game', "You're worried about what full price does to your financial future."]);
+          else if (a.full_price_worry_value === 0.5) rows.push(['The long game', "You're somewhat worried about what full price does to your financial future."]);
+          var box = document.getElementById('q-pieces'), ul = document.getElementById('q-pieces-list');
+          if (!box || !ul || !rows.length) return;
+          rows.forEach(function (r) {
+            var li = document.createElement('li'), b = document.createElement('b');
+            b.textContent = r[0] + '.';
+            li.appendChild(b); li.appendChild(document.createTextNode(' ' + r[1]));
+            ul.appendChild(li);
+          });
+          box.hidden = false;
+        })();
+        </script>
       </div>
 
       <div class="widget-col">

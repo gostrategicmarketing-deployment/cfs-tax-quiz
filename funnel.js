@@ -540,6 +540,8 @@
 
     var ok = qualified();
     answers.leadEventId = eventId();
+    /* Same-tab hand-off: the booking page lists which pieces to start with. */
+    try { sessionStorage.setItem('fnl_answers', JSON.stringify(answers)); } catch (e) {}
     var ev = (CFG.tracking.events || {})[ok ? 'qualified' : 'dq'] || (ok ? 'QuizQualified' : 'QuizDQ');
     track(ev, { outcome: ok ? 'qualified' : 'dq' }, { eventID: answers.leadEventId });
 

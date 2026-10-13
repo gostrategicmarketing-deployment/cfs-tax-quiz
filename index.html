@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>3 Steps to Pay for College Without Sacrificing Your Financial Future</title>
+<title>Paying Full Price for College and Full Price in Taxes?</title>
 <meta name="description" content="">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -110,6 +110,8 @@ head.appendChild(script);
           <span id="heroKicker"></span>
         </span>
         <h1 id="heroH1"></h1>
+        <p class="hook" id="heroHook"></p>
+        <ol class="pieces" id="heroPieces" aria-label="The four pieces"></ol>
       </div>
 
       <div class="quiz-card">
@@ -169,10 +171,15 @@ head.appendChild(script);
 
   var build = {
     steps: function (s) {
-      return '<section class="sec white"><div class="inner"><h2 class="sec-h">' + esc(s.title) + '</h2><div class="grid">' +
+      return '<section class="sec white"><div class="inner"><h2 class="sec-h' + (s.lead ? ' has-lead' : '') + '">' + esc(s.title) + '</h2>' +
+        (s.lead ? '<p class="seclead">' + esc(s.lead) + '</p>' : '') + '<div class="grid">' +
         (s.items || []).map(function (i, n) {
-          return '<div class="cell"><span class="tag">Step ' + (n + 1) + '</span><h3>' + esc(i.title) + '</h3><p>' + esc(i.body) + '</p></div>';
+          return '<div class="cell"><span class="tag">' + esc(s.tag || 'Step') + ' ' + (n + 1) + '</span><h3>' + esc(i.title) + '</h3><p>' + esc(i.body) + '</p></div>';
         }).join('') + '</div></div></section>';
+    },
+    story: function (s) {
+      return '<section class="sec"><div class="inner narrow story"><h2 class="sec-h">' + esc(s.title) + '</h2>' +
+        (s.body || []).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div></section>';
     },
     /* Press: outlet logos only. */
     press: function (s) {
@@ -185,7 +192,7 @@ head.appendChild(script);
         }).join('') + '</div></div></section>';
     },
     covers: function (s) {
-      return '<section class="sec"><div class="inner"><h2 class="sec-h">' + esc(s.title) + '</h2><div class="grid">' +
+      return '<section class="sec white"><div class="inner"><h2 class="sec-h">' + esc(s.title) + '</h2><div class="grid">' +
         (s.items || []).map(function (i, n) {
           return '<div class="cell"><span class="num">' + (n + 1) + '</span><h3>' + esc(i.title) + '</h3><p>' + esc(i.body) + '</p></div>';
         }).join('') + '</div>' +
@@ -193,7 +200,7 @@ head.appendChild(script);
         '</div></section>';
     },
     faq: function (s) {
-      return '<section class="sec white"><div class="inner narrow"><h2 class="sec-h">' + esc(s.title) + '</h2>' +
+      return '<section class="sec"><div class="inner narrow"><h2 class="sec-h">' + esc(s.title) + '</h2>' +
         (s.items || []).map(function (i) {
           return '<details class="faq"><summary>' + esc(i.q) + '</summary><p>' + esc(i.a) + '</p></details>';
         }).join('') + '</div></section>';
@@ -221,6 +228,11 @@ head.appendChild(script);
   text('introNote', CFG.quiz.intro);
   text('heroKicker', CFG.kicker);
   text('heroQual', CFG.qualifier);
+  text('heroHook', CFG.hook);
+  var pc = document.getElementById('heroPieces');
+  if (pc) pc.innerHTML = (CFG.pieces || []).map(function (p, n) {
+    return '<li><b>' + (n + 1) + '</b>' + esc(p) + '</li>';
+  }).join('');
 })();
 </script>
 </body>
