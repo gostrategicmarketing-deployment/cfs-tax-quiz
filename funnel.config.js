@@ -1,34 +1,22 @@
-/* Tax Scholarship quiz configuration. */
+/* Quiz configuration. */
 window.FUNNEL = {
   brand: {
-    name: 'College Funding Secrets',
-    title: 'Is the Tax Scholarship a Fit for Your Family?',
-    description: 'Five quick steps to see whether a free strategy call makes sense for your family.',
-    logo: 'assets/cfs-logo.png',
-    theme: {
-      ink:       '#072B53',
-      paper:     '#FFFFFF',
-      accent:    '#FCB903',
-      accentInk: '#072B53',
-      muted:     '#475467',
-      line:      '#E4E7EC',
-      band:      '#F5F7FA',
-      heroInk:   '#FFFFFF',
-      heroWashRgb: '7,43,83'
-    }
+    name: 'Legetty',
+    title: '3 Steps to Pay for College Without Sacrificing Your Financial Future',
+    description: 'Answer 6 quick questions to see whether a free 30-minute review call makes sense for your family.'
   },
   webhook: {
     url: '',
     platform: 'Facebook'
   },
   routes: {
-    qualified: 'https://realestatecollegefundingsecrets.com/li-old',
+    qualified: 'book/',
     dq:        'https://collegefundingsecrets.com/RightPrice',
     dqDelay: 7
   },
   qualify: function (a) {
-    return (a.household_income_value || 0) >= 200000 ||
-           (a.invest_capacity_value  || 0) >= 80000;
+    var yesAidOrTaxes = a.aid_concern_value === 1 || a.taxes_vs_college_value === 1;
+    return yesAidOrTaxes && a.real_estate_value !== 0;
   },
   tags: {
     all: 'tax-quiz',
@@ -44,50 +32,61 @@ window.FUNNEL = {
     googleAds: { id: '', lead: '', booking: '' }
   },
   quiz: {
-    intro: '5 quick steps. About 30 seconds.',
+    intro: '6 quick steps. Under a minute.',
     slides: [
       {
-        q: 'students',
+        q: 'has_529',
         type: 'choice',
-        title: 'How many students are you planning college for?',
-        note: 'Children or grandchildren.',
+        title: "Do you currently have a 529 account for your kids' college?",
+        note: 'Children or grandchildren both count.',
         options: [
-          { label: '1 student' },
-          { label: '2 students' },
-          { label: '3 or more' }
+          { label: 'Yes, we have a 529' },
+          { label: 'No, we are saving another way' },
+          { label: 'No, we have not started saving yet' }
         ]
       },
       {
-        q: 'grad_year',
+        q: 'aid_concern',
         type: 'choice',
-        title: 'When does your oldest student finish high school?',
+        title: 'Are you concerned that you make too much money to get financial aid?',
+        note: 'Step 1 of the framework looks at what college may really cost your family, including financial aid eligibility.',
         options: [
-          { label: 'Already in college' },
-          { label: '2027' },
-          { label: '2028 or 2029' },
-          { label: '2030 or later' }
+          { label: 'Yes, I doubt we will get much aid',     value: 1 },
+          { label: 'I am not sure where we stand',          value: 0 },
+          { label: 'No, I expect we will qualify for aid',  value: 0 }
         ]
       },
       {
-        q: 'household_income',
+        q: 'full_price_worry',
         type: 'choice',
-        title: 'What is your approximate household income?',
-        note: 'A range is fine. It helps us point you to the right next step.',
+        title: 'Are you worried that paying full price for college will hurt your financial future?',
+        note: 'Step 3 is about paying for college without draining the savings and retirement money that should keep compounding for you.',
         options: [
-          { label: 'Under $200,000',         value: 0 },
-          { label: '$200,000 to $249,999',   value: 200000 },
-          { label: '$250,000 to $499,999',   value: 250000 },
-          { label: '$500,000 or more',       value: 500000 }
+          { label: 'Yes, that worries me' },
+          { label: 'Somewhat' },
+          { label: 'No, we have it covered' }
         ]
       },
       {
-        q: 'invest_capacity',
+        q: 'taxes_vs_college',
         type: 'choice',
-        title: 'If the numbers made sense, could your family put $80,000 or more toward a short-term rental you would own?',
+        title: 'On top of that, are you paying more in taxes every year than it costs to send your child to college?',
+        note: "Compare your yearly income tax bill with one year of college for one student. Your best guess is fine. Step 2 looks at how tax planning could cover more of the cost, even if you're a W-2 earner.",
         options: [
-          { label: 'Yes, $80,000 or more',  value: 80000 },
-          { label: 'Not sure yet',          value: 0 },
-          { label: 'No, not right now',     value: 0 }
+          { label: 'Yes, our tax bill is bigger',  value: 1 },
+          { label: 'No, our tax bill is smaller',  value: 0 },
+          { label: 'I am not sure',                value: 0 }
+        ]
+      },
+      {
+        q: 'real_estate',
+        type: 'choice',
+        title: "Would you like the idea of investing in real estate if it could lower your taxes and help pay for college, and you didn't have to find it, analyze it, design it, or manage it yourself?",
+        note: 'For some families, Step 2 includes real estate they own.',
+        options: [
+          { label: 'Yes, I have always wanted to. I just do not have the time.', value: 1 },
+          { label: 'Maybe. I would want to learn more first.',                   value: 1 },
+          { label: 'No, real estate is not for me.',                             value: 0 }
         ]
       },
       {
@@ -95,34 +94,47 @@ window.FUNNEL = {
         type: 'contact',
         title: 'Last step. Where should we send your next step?',
         note: 'Your details carry over, so you will not need to type them again.',
-        submitLabel: 'See My Next Step'
+        submitLabel: 'See My Next Step',
+        privacyUrl: 'https://collegefundingsecrets.com/privacy-policy'
       }
     ]
   },
   results: {
     qualified: {
       h: 'Good news, {first}. Your answers line up.',
-      p: 'Taking you to the calendar now to pick a time for your free strategy call.',
+      p: 'Taking you to the calendar now to pick a time for your free Tax & College Opportunity Review Call.',
       link: 'Continue to the calendar'
     },
     dq: {
-      h: 'Thanks, {first}.',
-      p: 'Based on your answers, a one-on-one strategy call is not the best next step for your family right now. ' +
+      h: 'Thanks for taking the quiz.',
+      p: 'Based on your answers, a one-on-one review call is not the best next step for your family right now. ' +
          'Lance recorded a free session with college-planning expert Cori Murphy, Right College, Right Price. ' +
          'It covers finding schools that fit your student, comparing what different colleges could actually cost, ' +
-         'and where scholarships and financial aid fit into the picture.',
+         'and where scholarships and financial aid fit into the picture. Taking you there in a few seconds.',
       link: 'Watch Right College, Right Price'
     }
   },
   variants: {
     _default: {
-      h1: 'Is the Tax Scholarship a Fit for Your Family?',
-      sub: 'Smart families are pointing the tax savings from a short-term rental they own at tuition. ' +
-           'Answer a few quick questions to see your next step.',
-      img: 'assets/hero.jpg'
+      h1: '<span class="lead-in">3 Steps to Pay for College</span> <span class="deep">Without Sacrificing Your Financial Future</span>',
+      sub: 'Answer 6 quick questions to see whether a free 30-minute review call makes sense for your family.'
     }
   },
+  kicker: 'Free 6-question quiz',
+  qualifier: 'This review is for families earning about $250,000+ or paying $30,000+ a year in federal taxes.',
   sections: [
+    {
+      type: 'steps',
+      title: 'The 3 steps',
+      items: [
+        { title: 'Reduce',
+          body: 'Understand what college may really cost your family, including school choice and financial aid eligibility, before you decide how to pay.' },
+        { title: 'Offset',
+          body: "See how strategic tax planning could cover more of what's left, even if you're a W-2 earner. For some families, that includes real estate they own." },
+        { title: 'Fund',
+          body: 'Pay the balance without draining the savings and retirement money that should keep compounding for you.' }
+      ]
+    },
     {
       type: 'press',
       title: 'Lance Morgan, as featured in',
@@ -134,42 +146,36 @@ window.FUNNEL = {
         { src: 'assets/press/gobankingrates.png', alt: 'GOBankingRates' },
         { src: 'assets/press/wbz.png', alt: 'WBZ NewsRadio 1030' },
         { src: 'assets/press/california-business-journal.png', alt: 'California Business Journal' }
-      ],
-      cards: [
-        { src: 'assets/press/card-american-reporter.jpg', alt: 'The American Reporter: Retirement-Proofing College' },
-        { src: 'assets/press/card-enterprise-radio.jpg', alt: 'Enterprise Radio: College Funding Secrets founder on taxes, real estate, and tuition planning' },
-        { src: 'assets/press/card-parenting-teens-today.jpg', alt: 'Parenting Teens Today podcast with Lance Morgan' },
-        { src: 'assets/press/card-reverse-your-thinking.jpg', alt: 'abc News Radio KMET: Reverse Your Thinking, guest Lance Morgan' }
       ]
     },
     {
       type: 'covers',
-      title: 'What the free strategy call covers',
+      title: 'What the free review call covers',
       items: [
         { title: 'Your college cost picture',
-          body: 'A projected cost of attendance for each student, built around the schools your family is actually considering.' },
+          body: 'What college could cost for each student, based on the schools your family is considering.' },
         { title: 'Your tax picture',
-          body: 'Where a short-term rental you own could create deductions, and what that could mean for your family. Consult your CPA. Results vary.' },
-        { title: 'The Scholarship House plan',
-          body: 'How the cash flow and tax savings from one house can be pointed at tuition while your retirement keeps working.' }
-      ]
+          body: 'Your income and tax bill side by side, and which strategies may be worth a closer look.' },
+        { title: 'Whether a deeper conversation makes sense',
+          body: 'You decide together with our team. There is no need to choose a strategy on the call.' }
+      ],
+      note: 'This is an exploratory conversation. No tax, legal, investment, or financial outcome is promised.'
     },
     {
       type: 'faq',
       title: 'Questions families ask',
       items: [
         { q: 'How long is the call?', a: 'About 30 minutes, one on one with a member of our advisory team.' },
-        { q: 'What does the call cost?', a: 'Nothing. The strategy call is free.' },
-        { q: 'Do I need real estate experience?', a: 'No real estate experience needed. We will walk you through it or handle it for you.' },
-        { q: 'Should my spouse join?', a: 'Yes, if you make financial decisions together. Most families find it easier when both of you hear the plan at the same time.' }
+        { q: 'What does the call cost?', a: 'Nothing. The review call is free.' },
+        { q: "I'm a W-2 employee. Does this still apply?", a: 'It can. The framework includes tax-planning concepts that may apply to W-2 employees, 1099 earners, and business owners. Whether a strategy fits depends on your situation and the rules involved.' },
+        { q: 'Should my spouse join?', a: 'Yes, if you make financial decisions together. Most families find it easier when both of you hear the same information at the same time.' }
       ]
     },
     {
       type: 'finalcta',
       title: 'See your next step',
-      body: 'Five quick steps, then you will know whether a strategy call makes sense for your family.',
+      body: 'Six quick steps, then you will know whether a review call makes sense for your family.',
       cta: 'Start the Quiz'
     }
-  ],
-  footer: 'Educational content only. Not tax, legal, or investment advice. Consult your CPA. Results vary.'
+  ]
 };

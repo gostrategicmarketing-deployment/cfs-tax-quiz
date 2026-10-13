@@ -183,7 +183,8 @@
         '</div>' +
         '<input type="email" id="qemail" autocomplete="email" inputmode="email" placeholder="Email address" aria-label="Email address">' +
         '<p class="qerr" id="qerr" role="alert"></p>' +
-        '<button class="qgo" id="qgo" type="button">' + esc(s.submitLabel || 'Continue') + '</button>';
+        '<button class="qgo" id="qgo" type="button">' + esc(s.submitLabel || 'Continue') + '</button>' +
+        (s.privacyUrl ? '<p class="qprivacy"><a href="' + esc(s.privacyUrl) + '" target="_blank" rel="noopener">Privacy Policy</a></p>' : '');
       d.appendChild(wrap);
       return d;
     }

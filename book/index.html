@@ -1,0 +1,1403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<!-- GHL: remove the noindex meta on the live domain -->
+<title>You Qualify: Book Your Tax &amp; College Opportunity Review Call</title>
+<meta name="description" content="Your quiz answers line up. Pick a time for your free 30-minute Tax &amp; College Opportunity Review Call.">
+<meta property="og:title" content="You Qualify: Book Your Tax &amp; College Opportunity Review Call">
+<meta property="og:description" content="Your quiz answers line up. Pick a time for your free 30-minute Tax &amp; College Opportunity Review Call.">
+<meta property="og:type" content="website">
+<script>
+/* Quiz hand-off. The quiz sends first_name / last_name / email on the URL so the
+   calendar below can prefill. Read them once, keep them for this tab only, and
+   take them back out of the address bar so they are not left in history or
+   picked up by anything that reads the page URL. Tracking params stay. */
+(function () {
+  var q = new URLSearchParams(location.search), c = {}, had = false;
+  ['first_name', 'last_name', 'email'].forEach(function (k) {
+    var v = (q.get(k) || '').trim();
+    if (q.has(k)) had = true;
+    if (v) c[k] = v;
+    q.delete(k);
+  });
+  try {
+    if (c.email || c.first_name) sessionStorage.setItem('fnl_contact', JSON.stringify(c));
+    else c = JSON.parse(sessionStorage.getItem('fnl_contact') || '{}') || {};
+  } catch (e) {}
+  window.QUIZ_CONTACT = c;
+  window.QUIZ_TRACK_QS = q.toString();
+  if (had && window.history && history.replaceState) {
+    history.replaceState(null, '', location.pathname + (window.QUIZ_TRACK_QS ? '?' + window.QUIZ_TRACK_QS : '') + location.hash);
+  }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<!--
+  QUIZ "YOU QUALIFY" BOOKING PAGE (2026-10-13). The step a qualified quiz taker lands on.
+  Built from the V3 booking page below; only the hero, the booking card copy and the calendar hand-off differ.
+  ---
+  CFS Book-A-Call page, V3 "Blue Interactive" (full build, 2026-10-02).
+  Unscoped preview of the GHL build. Each GHL SECTION NN block below = ../ghl/NN-name.html (scoped under .cfs-lp there).
+  Edit this file, then regenerate ../ghl/ with ../tools/build_ghl.py so the two stay in sync.
+  All copy is verbatim from booking-page-copy.md; proof is verbatim from social-proof.md and press-cards.md.
+  JS is progressive enhancement only (rotating step tabs + video facades). Everything is readable with JS off.
+  The only third-party script is GHL's calendar embed (form_embed.js) in the #book section.
+-->
+<style>
+  /* =====================================================================
+     TOKENS (from the approved V3 mockup; brand-guide verified)
+     ===================================================================== */
+  :root {
+    --blue: #4192D7;
+    --navy: #072B53;
+    --gold: #FCB903;
+    --green: #A6E22E;
+    --gray: #F5F7FA;
+    --white: #FFFFFF;
+    --ink: #101828;
+    --ink-2: #2C3345;
+    --line: rgba(7, 43, 83, 0.10);
+    --tint: rgba(65, 146, 215, 0.10);
+    --radius-card: 18px;
+    --radius-ctl: 10px;
+    --gutter: 16px;
+    --sec-pad: 56px;
+    --font-head: "Epilogue", "Inter", sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (min-width: 640px) { :root { --gutter: 28px; } }
+  @media (min-width: 980px) { :root { --sec-pad: 88px; } }
+
+  /* =====================================================================
+     BASE
+     ===================================================================== */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  body {
+    margin: 0;
+    background: var(--gray);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3 { font-family: var(--font-head); margin: 0; }
+  p { margin: 0; }
+  .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* =====================================================================
+     SHARED COMPONENTS: CTA button, section chrome, stars, expanders
+     ===================================================================== */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 56px;
+    padding: 14px 26px;
+    background: var(--green);
+    color: var(--navy); /* navy on green = 10.6:1 */
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    border-radius: var(--radius-ctl);
+    box-shadow: 0 0 0 2px var(--navy), 0 5px 0 2px var(--navy);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 2px var(--navy), 0 7px 0 2px var(--navy); }
+  .btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 5px; }
+  .btn svg { flex: none; }
+
+  .sec { padding: var(--sec-pad) 0; }
+  .eyebrow {
+    font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy);
+  }
+  .sec-h {
+    font-weight: 800; font-size: clamp(1.6rem, 1.2rem + 1.7vw, 2.5rem);
+    line-height: 1.1; letter-spacing: -0.02em; color: var(--navy); text-wrap: balance;
+  }
+  .eyebrow + .sec-h { margin-top: 8px; }
+
+  .stars { display: block; flex: none; }
+  .stars .s-empty polygon { fill: rgba(7, 43, 83, 0.55); } /* empty star 3.4:1 on the gray review card, 3.9:1 on white */
+  .stars .s-full polygon { fill: var(--gold); stroke: var(--navy); stroke-width: 0.7; stroke-linejoin: round; }
+
+  .more { margin-top: 16px; }
+  .more > summary {
+    list-style: none; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 48px; padding: 10px 20px; border-radius: var(--radius-ctl);
+    font-weight: 600; font-size: 16px;
+    border: 1.5px solid var(--navy); color: var(--navy); background: var(--white);
+  }
+  .more > summary::-webkit-details-marker { display: none; }
+  .more > summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .more > summary svg { transition: transform 0.2s ease; }
+  .more[open] > summary svg { transform: rotate(180deg); }
+  .more .when-open { display: none; }
+  .more[open] .when-open { display: inline; }
+  .more[open] .when-closed { display: none; }
+
+  /* =====================================================================
+     GHL SECTION 01: header (logo only, CFS blue)
+     ===================================================================== */
+  .cfs-header { background: var(--blue); }
+  .cfs-header .wrap { display: flex; align-items: center; height: 64px; }
+  .cfs-header img { height: 40px; width: auto; }
+  @media (min-width: 980px) {
+    .cfs-header .wrap { height: 84px; }
+    .cfs-header img { height: 48px; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 02: hero (CFS blue, asymmetric, steps as right column)
+     ===================================================================== */
+  .hero {
+    position: relative;
+    background: var(--blue);
+    color: var(--white);
+    padding-bottom: 72px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  /* static architectural accent: a navy wedge low right, deepens the ground under the card */
+  .hero::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -12%;
+    bottom: -38%;
+    width: 78%;
+    height: 90%;
+    background: var(--navy);
+    opacity: 0.10; /* <= 0.10 keeps #101828 text on the darkened blue >= 4.5:1 */
+    transform: rotate(-14deg);
+    border-radius: 48px;
+  }
+  .hero-grid { display: grid; gap: 28px; padding-top: 18px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--white);
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 14px 7px 10px;
+    border-radius: 999px;
+    line-height: 1.2;
+  }
+  .kicker svg { flex: none; }
+  .h1 {
+    margin-top: 16px;
+    font-weight: 800;
+    font-size: clamp(2.05rem, 1.25rem + 3.6vw, 3.75rem);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    color: var(--white); /* white on CFS blue = 3.3:1, AA large (800 weight, 33px+) */
+  }
+  /* large display text: navy on blue = 4.27:1, passes AA large */
+  .h1 .deep { color: var(--navy); }
+  .h1 .lead-in { display: block; } /* the white half sits on its own line so the color split lands on a line break */
+  .sub {
+    margin-top: 16px;
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--ink); /* 5.2:1 on CFS blue */
+    max-width: 36em;
+  }
+  .cta-row { margin-top: 22px; display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
+  .hero .btn:focus-visible { outline-color: var(--white); }
+  .qual {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 16px; line-height: 1.45;
+    color: var(--ink);
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  .qual::before {
+    content: ""; flex: none; width: 4px; align-self: stretch;
+    background: var(--navy); border-radius: 2px;
+  }
+  /* trust bar under the qualifier */
+  .trust { margin-top: 18px; display: grid; gap: 12px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge {
+    display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px 8px;
+    background: var(--white); color: var(--navy);
+    border-radius: 8px; padding: 7px 11px;
+    font-size: 14px; font-weight: 600; line-height: 1.25;
+    box-shadow: 0 1px 0 rgba(7, 43, 83, 0.18);
+  }
+  .badge svg.ico { flex: none; color: var(--navy); }
+  .badge .muted { font-weight: 500; color: var(--ink-2); }
+  .badge .stars { width: 78px; height: 16px; }
+  .featured { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .featured .lbl { font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+  .featured ul { list-style: none; margin: 0; padding: 0; display: contents; }
+  .featured li {
+    font-family: var(--font-head); font-weight: 700; font-size: 15px;
+    letter-spacing: -0.01em; color: var(--ink); white-space: nowrap;
+  }
+  /* phones (<640px): tighter hero so the button, both ratings and the press line share the first screen */
+  @media (max-width: 639px) {
+    .hero { padding-bottom: 48px; }
+    .hero-grid { padding-top: 8px; gap: 22px; }
+    .hero-copy { text-align: center; }
+    .h1, .sub { text-wrap: balance; margin-left: auto; margin-right: auto; }
+    .badge { align-items: center; text-align: center; }
+    .badge:first-child { justify-content: center; }
+    .steps .panel { text-align: center; }
+    .kicker { font-size: 12.5px; padding: 6px 12px 6px 9px; gap: 6px; }
+    .kicker svg { width: 14px; height: 14px; }
+    .h1 { margin-top: 12px; font-size: 1.875rem; line-height: 1.08; letter-spacing: -0.02em; } /* 30px 800: still AA large */
+    .sub { margin-top: 12px; font-size: 16px; line-height: 1.5; font-weight: 500; }
+    .cta-row { margin-top: 18px; gap: 10px; }
+    .cta-row .btn { min-height: 52px; padding: 12px 18px; font-size: 16.5px; }
+    .qual { font-size: 14px; line-height: 1.45; margin-top: 2px; text-align: center; justify-content: center; text-wrap: balance; }
+    .qual::before { display: none; }
+    .trust { margin-top: 16px; gap: 12px; }
+    /* both ratings in one compact white card, side by side */
+    .badges {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      background: var(--white); border-radius: 10px;
+      box-shadow: 0 1px 0 rgba(7, 43, 83, 0.18);
+    }
+    .badge {
+      background: none; box-shadow: none; border-radius: 0;
+      flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px;
+      padding: 10px 12px; font-size: 13.5px; line-height: 1.3;
+    }
+    .badge + .badge { border-left: 1px solid rgba(7, 43, 83, 0.14); align-items: center; text-align: center; }
+    .badge:first-child { flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 8px; text-align: left; }
+    .badge .stars { width: 72px; height: 14px; }
+    /* press names: one centered line of dot-separated names under a small label */
+    .featured { display: block; text-align: center; }
+    .featured .lbl { display: block; font-size: 13px; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .featured ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; }
+    .featured li { font-size: 14px; }
+  }
+  @media (min-width: 640px) {
+    .cta-row { flex-direction: row; flex-wrap: wrap; align-items: center; }
+    .cta-row .btn { align-self: flex-start; }
+    .qual { flex-basis: 100%; }
+    .trust { margin-top: 20px; }
+  }
+  @media (min-width: 980px) {
+    .hero { padding-bottom: 168px; }
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.28fr) minmax(0, 0.9fr);
+      gap: 56px;
+      align-items: end;
+      padding-top: 26px;
+    }
+    .sub { margin-top: 20px; }
+    .cta-row { margin-top: 28px; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 02 (cont.): steps inside the hero (rotating tabs; stacked and readable without JS)
+     ===================================================================== */
+  .steps {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: var(--radius-card);
+    padding: 18px;
+    box-shadow: 0 18px 40px rgba(7, 43, 83, 0.28);
+  }
+  .tablist { display: none; gap: 8px; }
+  .steps.cfs-js .tablist { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .tab {
+    position: relative;
+    appearance: none;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    background: transparent;
+    color: var(--white);
+    border-radius: 999px;
+    min-height: 52px;
+    padding: 6px 8px;
+    font-family: var(--font-body);
+    cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    line-height: 1.1;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .tab .n { font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+  .tab .w { font-family: var(--font-head); font-weight: 800; font-size: 17px; margin-top: 3px; }
+  .tab:hover { border-color: var(--white); }
+  .tab:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  .tab[aria-selected="true"] { background: var(--green); border-color: var(--green); color: var(--navy); }
+  /* the ONE ambient motion on the page: a gentle pulse ring on the selected pill */
+  .tab[aria-selected="true"]::after {
+    content: ""; position: absolute; inset: -2px;
+    border-radius: inherit;
+    border: 2px solid var(--green);
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .tab[aria-selected="true"]::after { animation: cfs-pulse 2.8s ease-out infinite; }
+  }
+  @keyframes cfs-pulse {
+    0% { transform: scale(1); opacity: 0.85; }
+    70% { transform: scale(1.14, 1.32); opacity: 0; }
+    100% { transform: scale(1.14, 1.32); opacity: 0; }
+  }
+  .panels { display: grid; gap: 16px; }
+  .panel { display: block; }
+  /* with JS all three panels share one grid cell, so the card keeps the tallest panel's height and the page
+     below never jumps when a step auto-advances; unselected panels are visibility:hidden (no opacity fades) */
+  .steps.cfs-js .panels { margin-top: 16px; display: grid; }
+  .steps.cfs-js .panel { grid-area: 1 / 1; }
+  .steps.cfs-js .panel[hidden] { display: block; visibility: hidden; }
+  .panel-h {
+    font-family: var(--font-body);
+    font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+  .steps.cfs-js .panel-h { margin-bottom: 6px; }
+  .panel p { font-size: 17px; line-height: 1.5; color: var(--white); }
+  /* no-JS stacked fallback gets thin dividers */
+  .steps:not(.cfs-js) .panel + .panel { border-top: 1px solid rgba(255, 255, 255, 0.18); padding-top: 14px; }
+  /* progress bars: the selected step's bar fills over the 5s auto-advance (transform only, never opacity) */
+  .dots { display: none; }
+  .steps.cfs-js .dots { display: flex; gap: 6px; margin-top: 14px; }
+  .dots span { position: relative; overflow: hidden; width: 28px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.28); }
+  .dots span::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    background: var(--green); transform: scaleX(0); transform-origin: left center;
+  }
+  .dots span.on::after { transform: scaleX(1); }
+  @media (prefers-reduced-motion: no-preference) {
+    .steps.is-rotating .dots span.on::after { animation: cfs-count 5s linear both; }
+    .steps.is-rotating.is-paused .dots span.on::after { animation-play-state: paused; }
+  }
+  @keyframes cfs-count { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @media (min-width: 980px) {
+    .steps { padding: 22px; margin-bottom: 6px; }
+    .tab { min-height: 60px; }
+    .tab .w { font-size: 19px; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 03: book (light gray; white card overlaps the hero edge; live GHL calendar)
+     ===================================================================== */
+  .book-sec {
+    position: relative; z-index: 2;
+    background: linear-gradient(to bottom, transparent 0, transparent 44px, var(--gray) 44px);
+    margin-top: -44px; padding-bottom: var(--sec-pad);
+    scroll-margin-top: 16px;
+  }
+  .card {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04), 0 18px 48px rgba(7, 43, 83, 0.16);
+    padding: 24px 18px;
+    display: grid;
+    gap: 24px;
+  }
+  .card-title {
+    font-weight: 800;
+    font-size: clamp(1.5rem, 1.15rem + 1.5vw, 2.25rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    text-wrap: balance;
+  }
+  .lead { font-size: 17px; color: var(--ink-2); }
+  /* mobile (<760px): heading, then the calendar widget, then the agenda, so the hero button lands on the widget */
+  @media (max-width: 759px) {
+    .card-title { order: 0; }
+    .widget-col { order: 1; }
+    .card-head { order: 2; }
+  }
+  @media (min-width: 760px) { .card-head { margin-top: -12px; } }
+  .agenda { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+  .agenda li { display: flex; gap: 12px; align-items: flex-start; font-size: 17px; line-height: 1.45; color: var(--ink); }
+  .agenda .ck {
+    flex: none; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--tint); color: var(--navy);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  /* live GHL booking widget: the min-height holds the card open until GHL's form_embed.js resizer runs */
+  .cfs-cal { background: var(--white); border-radius: 14px; overflow: hidden; }
+  .cfs-cal-frame { display: block; width: 100%; min-height: 900px; border: 0; } /* GHL widget measured 905px tall at 375 */
+  @media (min-width: 640px) { .cfs-cal-frame { min-height: 720px; } } /* measured 963px at 768 and 1440 */
+  .micro { margin-top: 14px; font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+  /* phones: the widget bleeds 10px into the card padding so the booking calendar gets the most width */
+  @media (max-width: 639px) {
+    .widget-col { margin-inline: -10px; }
+    .micro { padding-inline: 10px; }
+  }
+  @media (min-width: 640px) {
+    .card { padding: 32px; }
+  }
+  @media (min-width: 980px) {
+    .book-sec { margin-top: -120px; background: linear-gradient(to bottom, transparent 0, transparent 120px, var(--gray) 120px); }
+    .card {
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.3fr);
+      grid-template-rows: auto 1fr;
+      grid-template-areas: "title widget" "head widget";
+      column-gap: 44px;
+      row-gap: 12px;
+      padding: 40px;
+      align-items: start;
+    }
+    .card-title { grid-area: title; padding-top: 6px; }
+    .card-head { grid-area: head; margin-top: 0; }
+    .widget-col { grid-area: widget; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 04: reviews (white ground, light-gray cards)
+     ===================================================================== */
+  .reviews { background: var(--white); }
+  .ratings { margin-top: 20px; display: grid; gap: 10px; }
+  .rating {
+    background: var(--gray); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 16px; display: flex; align-items: center; gap: 14px;
+  }
+  .rating .big { font-family: var(--font-head); font-weight: 800; font-size: 30px; line-height: 1; color: var(--navy); }
+  .rating .stars { width: 98px; height: 20px; }
+  .rating .txt { font-size: 15px; line-height: 1.4; color: var(--ink-2); }
+  .rating .txt strong { color: var(--ink); font-weight: 600; }
+  .seal {
+    flex: none; width: 56px; height: 56px; border-radius: 12px; background: var(--navy); color: var(--white);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: var(--font-head); font-weight: 800; line-height: 1;
+  }
+  .seal b { font-size: 20px; }
+  .seal small { font-family: var(--font-body); font-size: 14px; font-weight: 600; letter-spacing: 0.08em; margin-top: 3px; }
+  .rev-list { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; align-items: start; }
+  .more .rev-list { margin-top: 12px; }
+  .rev figure {
+    margin: 0;
+    background: var(--gray); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .rev-stars { width: 88px; height: 18px; }
+  .rev blockquote { margin: 0; }
+  .rev blockquote p { font-size: 17px; line-height: 1.55; color: var(--ink); }
+  .rev blockquote p::before { content: "\201C"; }
+  .rev blockquote p::after { content: "\201D"; }
+  .rev figcaption { margin-top: auto; padding-top: 4px; display: grid; gap: 4px; font-size: 15px; }
+  .rev figcaption strong { color: var(--navy); font-weight: 600; }
+  .rev-src { color: var(--ink-2); }
+  /* inline proof links get a 44px tap row */
+  .rev-src a, .rating .txt a {
+    display: inline-block; padding: 12px 0; margin: -12px 0;
+    color: var(--navy); font-weight: 600; text-underline-offset: 2px; text-decoration: underline;
+  }
+  .rev-src a:focus-visible, .rating .txt a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 3px; }
+  .asof { margin-top: 16px; font-size: 15px; color: var(--ink-2); }
+  @media (min-width: 640px) {
+    .ratings { grid-template-columns: 1fr 1fr; }
+    .rev-list { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 980px) {
+    .ratings { max-width: 860px; }
+    .rev-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 05: videos (navy; click-to-play facades, no iframe until a click)
+     ===================================================================== */
+  .cfs-videos { background: var(--navy); color: var(--white); }
+  .cfs-videos .sec-h { color: var(--white); }
+  .cfs-vid-media {
+    position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden;
+    background: var(--ink); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  }
+  .cfs-vid, .cfs-vid-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  .cfs-vid { color: var(--navy); text-decoration: none; }
+  .cfs-vid img { width: 100%; height: 100%; object-fit: cover; }
+  .cfs-vid:focus-visible { outline: 3px solid var(--green); outline-offset: -3px; }
+  .cfs-vid-play {
+    position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px;
+    border-radius: 50%; background: var(--green); color: var(--navy); /* navy on green = 10.6:1 */
+    box-shadow: 0 0 0 2px var(--navy), 0 6px 16px rgba(0, 0, 0, 0.35);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.15s ease;
+  }
+  .cfs-vid-play svg { margin-left: 4px; }
+  .cfs-vid:hover .cfs-vid-play { transform: scale(1.08); }
+  .cfs-vid-dur {
+    position: absolute; right: 10px; bottom: 10px; padding: 3px 8px; border-radius: 6px;
+    background: var(--navy); color: var(--white); font-size: 14px; font-weight: 600; line-height: 1.3;
+  }
+  .cfs-vid-feat { margin-top: 24px; display: grid; gap: 16px; }
+  .cfs-vid-feat .cfs-vid-play { width: 80px; height: 80px; margin: -40px 0 0 -40px; }
+  .cfs-vid-cap { margin-top: 12px; display: grid; gap: 6px; }
+  .cfs-vid-feat .cfs-vid-cap { margin-top: 0; }
+  .cfs-vid-name { font-family: var(--font-head); font-weight: 700; font-size: 19px; line-height: 1.25; color: var(--white); }
+  .cfs-vid-feat .cfs-vid-name { font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem); }
+  .cfs-vid-cap p { font-size: 16px; line-height: 1.55; color: rgba(255, 255, 255, 0.9); }
+  .cfs-vid-cap blockquote { margin: 0; }
+  .cfs-vid-cap blockquote p::before { content: "\201C"; }
+  .cfs-vid-cap blockquote p::after { content: "\201D"; }
+  .cfs-vid-row { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 22px; }
+  .cfs-vid-hint { display: none; }
+  .cfs-vid-note { margin-top: 22px; font-size: 15px; color: rgba(255, 255, 255, 0.85); }
+  @media (max-width: 639px) {
+    .cfs-vid-hint {
+      display: flex; align-items: center; gap: 8px; margin-top: 26px;
+      font-size: 15px; font-weight: 600; color: var(--green);
+    }
+    .cfs-vid-row {
+      margin: 12px calc(-1 * var(--gutter)) 0; padding: 0 var(--gutter) 10px;
+      grid-auto-flow: column; grid-auto-columns: 80%; gap: 14px;
+      overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter);
+      -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;
+    }
+    .cfs-vid-row > li { scroll-snap-align: start; }
+  }
+  @media (min-width: 640px) {
+    .cfs-vid-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 980px) {
+    .cfs-vid-feat { margin-top: 32px; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+    .cfs-vid-feat .cfs-vid-cap p { font-size: 18px; }
+    .cfs-vid-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin-top: 40px; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 06: fit (light gray; two-column contrast on desktop)
+     ===================================================================== */
+  .cfs-fit { background: var(--gray); }
+  .cfs-fit-grid { margin-top: 24px; display: grid; gap: 16px; }
+  .cfs-fit-card { border-radius: var(--radius-card); padding: 22px 20px; }
+  .cfs-fit-yes { background: var(--white); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(7, 43, 83, 0.05); }
+  .cfs-fit-no { background: var(--navy); color: var(--white); }
+  .cfs-fit-card h3, .cfs-fit-lead {
+    font-family: var(--font-head); font-weight: 700; font-size: 20px; line-height: 1.25; letter-spacing: -0.01em;
+  }
+  .cfs-fit-lead { color: var(--navy); }
+  .cfs-fit-no h3 { color: var(--white); }
+  .cfs-fit-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 12px; }
+  .cfs-fit-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 17px; line-height: 1.5; }
+  .cfs-fit-yes li { color: var(--ink); }
+  .cfs-fit-no li { color: var(--white); }
+  .cfs-ic {
+    flex: none; width: 26px; height: 26px; border-radius: 50%; margin-top: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .cfs-fit-yes .cfs-ic { background: var(--green); color: var(--navy); }
+  .cfs-fit-no .cfs-ic { border: 1.5px solid rgba(255, 255, 255, 0.7); color: var(--white); }
+  @media (min-width: 640px) {
+    .cfs-fit-card { padding: 30px 28px; }
+  }
+  @media (min-width: 980px) {
+    .cfs-fit .sec-h { max-width: 18em; }
+    .cfs-fit-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; margin-top: 32px; align-items: start; }
+    .cfs-fit-card { padding: 36px; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 07: numbers (CFS blue; checklist card)
+     small text on blue is #101828 only; white is reserved for the large bold heading
+     ===================================================================== */
+  .cfs-numbers { background: var(--blue); position: relative; overflow: hidden; isolation: isolate; }
+  .cfs-numbers::before {
+    content: ""; position: absolute; z-index: -1; right: -20%; top: -30%; width: 60%; height: 140%;
+    background: var(--navy); opacity: 0.12; transform: rotate(14deg); border-radius: 48px;
+  }
+  .cfs-numbers-grid { display: grid; gap: 22px; }
+  .cfs-numbers .sec-h { color: var(--white); } /* 800 weight, 26px+ : AA large */
+  .cfs-numbers-lead { margin-top: 12px; font-size: 18px; line-height: 1.5; font-weight: 500; color: var(--ink); max-width: 30em; }
+  .cfs-checklist {
+    list-style: none; margin: 0; padding: 6px 18px;
+    background: var(--white); border-radius: var(--radius-card);
+    box-shadow: 0 0 0 2px var(--navy), 0 6px 0 2px var(--navy);
+    display: grid;
+  }
+  .cfs-checklist li {
+    display: flex; align-items: center; gap: 14px;
+    min-height: 56px; padding: 10px 0;
+    font-size: 17px; line-height: 1.4; font-weight: 500; color: var(--ink);
+  }
+  .cfs-checklist li + li { border-top: 1px solid var(--line); }
+  .cfs-box { flex: none; color: var(--navy); display: inline-flex; }
+  @media (min-width: 640px) {
+    .cfs-checklist { grid-template-columns: 1fr 1fr; column-gap: 28px; padding: 10px 26px; }
+    .cfs-checklist li:nth-child(2) { border-top: 0; }
+  }
+  @media (min-width: 980px) {
+    .cfs-numbers-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: 56px; align-items: center; }
+    .cfs-checklist li { min-height: 68px; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 08: lance (white; photo slot + bio; the one mid-page CTA)
+     ===================================================================== */
+  .cfs-lance { background: var(--white); }
+  .cfs-lance-grid {
+    display: grid; grid-template-columns: 112px minmax(0, 1fr);
+    grid-template-areas: "photo head" "body body";
+    column-gap: 18px; row-gap: 18px; align-items: center;
+  }
+  .cfs-photo { grid-area: photo; }
+  .cfs-lance-head { grid-area: head; }
+  .cfs-lance-body { grid-area: body; }
+  .cfs-photo {
+    width: 100%; aspect-ratio: 4 / 5;
+    border-radius: var(--radius-card);
+    background: var(--gray);
+    border: 2px dashed rgba(7, 43, 83, 0.28);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    padding: 8px; text-align: center;
+    color: var(--ink-2); font-size: 14px; font-weight: 600; line-height: 1.3;
+  }
+  .cfs-photo svg { color: var(--navy); opacity: 0.55; }
+  .cfs-lance h2 { font-size: clamp(1.9rem, 1.3rem + 2.4vw, 3rem); }
+  .cfs-lance-bio { font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 38em; }
+  .cfs-lance .btn { margin-top: 26px; }
+  @media (min-width: 640px) {
+    .cfs-lance-grid {
+      grid-template-columns: 200px minmax(0, 1fr);
+      grid-template-areas: "photo head" "photo body";
+      grid-template-rows: auto 1fr; column-gap: 32px; row-gap: 14px; align-items: start;
+    }
+    .cfs-photo { font-size: 14px; padding: 12px; }
+  }
+  @media (min-width: 980px) {
+    .cfs-lance-grid { grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr); column-gap: 64px; align-content: center; }
+    .cfs-lance-head { align-self: end; }
+    .cfs-photo { max-width: 380px; font-size: 15px; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 09: faq (light gray; native details accordions)
+     ===================================================================== */
+  .cfs-faq { background: var(--gray); }
+  .cfs-faq-grid { display: grid; gap: 20px; }
+  .cfs-faq-list { display: grid; gap: 10px; }
+  .cfs-q { background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
+  .cfs-q > summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    min-height: 60px; padding: 14px 18px;
+    border-radius: 14px;
+  }
+  .cfs-q > summary::-webkit-details-marker { display: none; }
+  .cfs-q > summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  .cfs-q-t { font-family: var(--font-head); font-weight: 700; font-size: 18px; line-height: 1.3; color: var(--navy); }
+  .cfs-q-ic {
+    flex: none; position: relative; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--tint);
+  }
+  .cfs-q-ic::before, .cfs-q-ic::after {
+    content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2.5px; margin: -1.25px 0 0 -6px;
+    background: var(--navy); border-radius: 2px; transition: transform 0.2s ease;
+  }
+  .cfs-q-ic::after { transform: rotate(90deg); }
+  .cfs-q[open] .cfs-q-ic { background: var(--navy); }
+  .cfs-q[open] .cfs-q-ic::before, .cfs-q[open] .cfs-q-ic::after { background: var(--white); }
+  .cfs-q[open] .cfs-q-ic::after { transform: rotate(0deg); }
+  .cfs-q-a { padding: 0 18px 18px; }
+  .cfs-q-a p { font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 44em; }
+  @media (min-width: 980px) {
+    .cfs-faq-grid { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: 56px; align-items: start; }
+    .cfs-q > summary { padding: 18px 24px; }
+    .cfs-q-a { padding: 0 24px 22px; }
+    .cfs-q-t { font-size: 19px; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 10: press (navy; 32 cards + 2 text features)
+     ===================================================================== */
+  .press { background: var(--navy); color: var(--white); }
+  .press .sec-h { color: var(--white); }
+  .press-grid { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .more .press-grid { margin-top: 12px; }
+  .pc a {
+    display: block; border-radius: 12px; overflow: hidden; background: var(--white);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+    transition: transform 0.15s ease;
+  }
+  .pc a:hover { transform: translateY(-2px); }
+  .pc a:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+  .pc img { width: 100%; height: auto; aspect-ratio: 860 / 1330; object-fit: contain; object-position: center top; background: var(--white); }
+  .pc.dk { display: none; }
+  .press .more > summary { background: transparent; color: var(--white); border-color: rgba(255, 255, 255, 0.7); }
+  .press .more > summary:hover { border-color: var(--white); }
+  .press .more > summary:focus-visible { outline-color: var(--green); }
+  .also { margin-top: 30px; }
+  .also h3 { font-family: var(--font-body); font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+  .also ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; }
+  .also a {
+    display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 12px 16px;
+    border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.22); background: rgba(255, 255, 255, 0.06);
+    color: var(--white); text-decoration: none;
+  }
+  .also a:hover { border-color: rgba(255, 255, 255, 0.55); }
+  .also a:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+  .also .ic { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--green); color: var(--navy); display: flex; align-items: center; justify-content: center; }
+  .also .t { display: grid; gap: 2px; flex: 1; min-width: 0; }
+  .also .t strong { font-weight: 600; font-size: 16px; line-height: 1.35; }
+  .also .t span { font-size: 15px; color: rgba(255, 255, 255, 0.85); }
+  .also .go { flex: none; }
+  @media (min-width: 640px) {
+    .press-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .also ul { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 980px) {
+    .press-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+    .pc.dk { display: block; }
+    .pc.mb { display: none; }
+  }
+
+  /* =====================================================================
+     GHL SECTION 11: closer (CFS blue)
+     ===================================================================== */
+  .closer { background: var(--blue); position: relative; overflow: hidden; isolation: isolate; }
+  .closer::before {
+    content: ""; position: absolute; z-index: -1; left: -18%; top: -40%; width: 70%; height: 120%;
+    background: var(--navy); opacity: 0.10; transform: rotate(-14deg); border-radius: 48px; /* <= 0.10 keeps body text >= 4.5:1 */
+  }
+  .closer-in { max-width: 760px; }
+  .closer h2 {
+    font-weight: 800; font-size: clamp(1.75rem, 1.2rem + 2.3vw, 2.75rem);
+    line-height: 1.08; letter-spacing: -0.02em; color: var(--white); text-wrap: balance; /* AA large */
+  }
+  .closer p { margin-top: 14px; font-size: 18px; line-height: 1.5; font-weight: 500; color: var(--ink); max-width: 36em; }
+  .closer .btn { margin-top: 24px; }
+  .closer .btn:focus-visible { outline-color: var(--white); }
+
+  /* =====================================================================
+     GHL SECTION 12: footer (white; compliance + copyright)
+     ===================================================================== */
+  .cfs-footer { background: var(--white); border-top: 1px solid var(--line); padding: 32px 0 36px; }
+  .cfs-footer img { height: 36px; width: auto; }
+  .cfs-footer .legal { margin-top: 18px; font-size: 16px; line-height: 1.6; color: var(--ink-2); max-width: 62em; }
+  .cfs-footer-row {
+    margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 20px;
+    font-size: 15px; color: var(--ink-2);
+  }
+  .cfs-footer-links { display: flex; align-items: center; gap: 4px; }
+  .cfs-footer-links a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px;
+    color: var(--navy); font-weight: 600; text-underline-offset: 2px;
+  }
+  .cfs-footer-links a:first-child { padding-left: 0; }
+  .cfs-footer-links a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 3px; }
+  .cfs-footer-links .bar { color: var(--ink-2); }
+
+  /* =====================================================================
+     PHONES (<640px): centered headings, intro lines and CTAs to match the centered hero.
+     Lists, review cards, FAQ answers and the calendar stay left-aligned for readability.
+     ===================================================================== */
+  @media (max-width: 639px) {
+    .card-title, .sec-h, .eyebrow, .cfs-numbers-lead, #book .lead,
+    .closer-in, .cfs-lance-head { text-align: center; text-wrap: balance; }
+    .cfs-lance-body { text-align: center; }
+    .cfs-lance-body .btn, .closer-in .btn { margin-left: auto; margin-right: auto; }
+    .cfs-photo { margin-left: auto; margin-right: auto; }
+    #book .micro { text-align: center; text-wrap: balance; }
+    .cfs-vid-note { text-align: center; text-wrap: balance; }
+    .cfs-vid-hint { justify-content: center; }
+    .cfs-header img { margin-left: auto; margin-right: auto; }
+    /* Lance: photo stacked and centered above the name */
+    .cfs-lance-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "photo" "head" "body"; row-gap: 14px; }
+    .cfs-photo { width: 140px; }
+  }
+
+  /* =====================================================================
+     DESKTOP / TABLET polish (2026-10-03): balanced hero for the longer H1, calendar space reserved while
+     GHL's widget loads, centered closer, capped photo slot.
+     ===================================================================== */
+  /* hold the calendar's space before form_embed.js reveals the iframe (it starts absolutely positioned) */
+  .cfs-cal { position: relative; min-height: 900px; }
+  @media (min-width: 640px) { .cfs-cal { min-height: 720px; } }
+  @media (min-width: 980px) {
+    .hero-grid { grid-template-columns: minmax(0, 1.42fr) minmax(0, 0.86fr); gap: 48px; align-items: center; }
+    .h1 { font-size: clamp(2.6rem, 1.4rem + 2.2vw, 3.35rem); line-height: 1.05; }
+    .h1 .lead-in { display: block; }
+    .sub { font-size: 1.25rem; max-width: 34em; }
+    .closer-in { margin-left: auto; margin-right: auto; text-align: center; }
+    .closer-in p { margin-left: auto; margin-right: auto; }
+    .closer-in .btn { margin-left: auto; margin-right: auto; }
+    .cfs-photo { max-width: 320px; justify-self: center; }
+  }
+
+  /* Lance family photo (2026-10-03): square group shot replaces the 4:5 placeholder box */
+  img.cfs-photo {
+    display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover;
+    padding: 0; border: 0; background: var(--gray);
+    border-radius: var(--radius-card); box-shadow: 0 10px 30px rgba(7, 43, 83, 0.16);
+  }
+  @media (max-width: 639px) { img.cfs-photo { width: 100%; max-width: 360px; } }
+  @media (min-width: 980px) { img.cfs-photo { max-width: 420px; } }
+</style>
+</head>
+<body>
+
+<!-- ===== GHL SECTION 01: header ===== -->
+<section id="site-header" class="cfs-header" data-ghl-section="01-header" aria-label="Site header">
+  <header class="wrap" role="banner">
+    <img src="assets/legetty-white.png" alt="Legetty" width="660" height="214">
+  </header>
+</section>
+
+<main>
+
+<!-- ===== GHL SECTION 02: hero ===== -->
+<section id="hero" class="hero" data-ghl-section="02-hero" aria-labelledby="hero-h">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="kicker">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.2"/><path d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="q-kicker">Good news. Your answers line up.</span>
+        </span>
+        <h1 class="h1" id="hero-h"><span class="lead-in">You Qualify for a Free</span> <span class="deep">Tax &amp; College Opportunity Review Call</span></h1>
+        <p class="sub">Based on your quiz answers, your family is a fit for a one-on-one review. Pick a time below and we'll show you how the 3 steps to pay for college without sacrificing your financial future could apply to you.</p>
+        <div class="cta-row">
+          <a class="btn" href="#book">
+            Pick a Time for My Review Call
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="qual">You're not booked until you pick a time below. The call is free and takes about 30 minutes.</p>
+        </div>
+        <div class="trust" aria-label="Ratings and press">
+          <div class="badges">
+            <!-- GHL: production MUST use BBB's dynamic Accredited Business seal and the official Trustpilot TrustBox widget here. These two text badges are mockup stand-ins only. -->
+            <span class="badge"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.5l8 3v6.2c0 4.7-3.3 8.7-8 9.8-4.7-1.1-8-5.1-8-9.8V5.5l8-3z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>BBB Accredited · A+ Rating</span>
+            <span class="badge"><svg class="stars" viewBox="0 0 100 20" role="img" aria-label="4.4 out of 5 stars"><defs><clipPath id="ts-hero"><rect x="0" y="0" width="88.2" height="20"/></clipPath></defs><g class="s-empty"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g><g class="s-full" clip-path="url(#ts-hero)"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g></svg><span>4.4 out of 5 on Trustpilot</span></span>
+          </div>
+          <div class="featured">
+            <span class="lbl">As featured in</span>
+            <ul>
+              <li>Yahoo Finance</li><li>MarketWatch</li><li>CNET</li><li>Realtor.com</li><li>GOBankingRates</li><li>Financial Advisor magazine</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== steps (part of GHL SECTION 02: hero) ===== -->
+      <!-- GHL: steps live inside the hero row in this design, so they ship inside ghl/02-hero.html (one custom-code block) -->
+      <!-- Right column of the hero row on desktop; directly under the hero copy on mobile.
+           Without JS all three steps render stacked; with JS they become Reduce / Offset / Fund tabs that
+           auto-advance every 5s (paused on hover/focus, stopped once a tab is used, off under reduced motion). -->
+      <section class="steps" id="steps" data-ghl-section="02-hero-steps" aria-label="The three steps">
+        <div class="tablist" role="tablist" aria-label="The three steps">
+          <button class="tab" role="tab" id="tab-1" aria-controls="step-1" aria-selected="true" tabindex="0"><span class="n">Step 1</span><span class="w">Reduce</span></button>
+          <button class="tab" role="tab" id="tab-2" aria-controls="step-2" aria-selected="false" tabindex="-1"><span class="n">Step 2</span><span class="w">Offset</span></button>
+          <button class="tab" role="tab" id="tab-3" aria-controls="step-3" aria-selected="false" tabindex="-1"><span class="n">Step 3</span><span class="w">Fund</span></button>
+        </div>
+        <div class="panels" aria-live="off">
+          <div class="panel" id="step-1" role="tabpanel" aria-labelledby="tab-1">
+            <h2 class="panel-h">STEP 1 · REDUCE</h2>
+            <p>Understand what college may really cost your family, including school choice and financial aid eligibility, before you decide how to pay.</p>
+          </div>
+          <div class="panel" id="step-2" role="tabpanel" aria-labelledby="tab-2">
+            <h2 class="panel-h">STEP 2 · OFFSET</h2>
+            <p>See how strategic tax planning could cover more of what's left, even if you're a W-2 earner. For some families, that includes real estate they own.</p>
+          </div>
+          <div class="panel" id="step-3" role="tabpanel" aria-labelledby="tab-3">
+            <h2 class="panel-h">STEP 3 · FUND</h2>
+            <p>Pay the balance without draining the savings and retirement money that should keep compounding for you.</p>
+          </div>
+        </div>
+        <div class="dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GHL SECTION 03: book ===== -->
+<section id="book" class="book-sec" data-ghl-section="03-book" aria-labelledby="book-h">
+  <div class="wrap">
+    <div class="card">
+      <h2 class="card-title" id="book-h">Book Your Tax &amp; College Opportunity Review Call</h2>
+      <div class="card-head">
+        <p class="lead">Pick a time below. <span id="q-prefill" hidden>Your name and email are already filled in. </span>During this first conversation, we'll:</p>
+        <ul class="agenda">
+          <li><span class="ck" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Understand your current tax and college-funding picture</li>
+          <li><span class="ck" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Identify whether there may be opportunities worth exploring</li>
+          <li><span class="ck" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Decide together whether a deeper strategy conversation makes sense</li>
+        </ul>
+      </div>
+
+      <div class="widget-col">
+        <!-- GHL: live Tax & College Opportunity Review Call calendar (inline, full width). GHL's widget renders its own header. -->
+        <!-- GHL: rename the calendar "Tax Scholarships 1 on 1 mtg" to "Tax & College Opportunity Review Call" in Calendars > Settings so the widget header matches -->
+        <div class="cfs-cal">
+          <iframe src="https://bookings.collegefundingsecrets.com/widget/booking/jz4PWYKlNfHjOEj0p1p5" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="jz4PWYKlNfHjOEj0p1p5_cfs" class="cfs-cal-frame" title="Book a Tax &amp; College Opportunity Review Call"></iframe>
+          <script>
+          (function () {
+            var c = window.QUIZ_CONTACT || {}, f = document.getElementById('jz4PWYKlNfHjOEj0p1p5_cfs');
+            var q = new URLSearchParams(window.QUIZ_TRACK_QS || '');
+            ['first_name', 'last_name', 'email'].forEach(function (k) { if (c[k]) q.set(k, c[k]); });
+            var s = q.toString().replace(/\+/g, '%20');
+            if (f && s) f.src = f.src.split('?')[0] + '?' + s;
+            if (c.email) { var p = document.getElementById('q-prefill'); if (p) p.hidden = false; }
+            var k = document.getElementById('q-kicker'), n = (c.first_name || '').replace(/\s+/g, ' ');
+            if (k && n && n.length <= 14) k.textContent = n + ', your answers line up.';
+          })();
+          </script>
+          <script src="https://bookings.collegefundingsecrets.com/js/form_embed.js" type="text/javascript"></script>
+        </div>
+        <!-- /GHL calendar embed -->
+        <p class="micro">There's no need to choose a strategy on this call. It's an exploratory conversation, and no tax, legal, investment, or financial outcome is promised. If you make financial decisions with a spouse, pick a time you can both join.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GHL SECTION 04: reviews ===== -->
+<section id="reviews" class="sec reviews" data-ghl-section="04-reviews" aria-labelledby="rev-h">
+  <div class="wrap">
+    <h2 class="sec-h" id="rev-h">What Families Say</h2>
+    <!-- GHL: production MUST use the official Trustpilot TrustBox widget and the BBB dynamic Accredited Business seal here (both self-update). These styled text cards are mockup stand-ins only. -->
+    <div class="ratings">
+      <div class="rating">
+        <span class="big">4.4</span>
+        <div class="txt"><svg class="stars" viewBox="0 0 100 20" role="img" aria-label="4.4 out of 5 stars"><defs><clipPath id="ts-rev"><rect x="0" y="0" width="88.2" height="20"/></clipPath></defs><g class="s-empty"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g><g class="s-full" clip-path="url(#ts-rev)"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g></svg><strong>out of 5 on Trustpilot</strong>. <a href="https://www.trustpilot.com/review/legetty.com" target="_blank" rel="noopener">See Trustpilot</a></div>
+      </div>
+      <div class="rating">
+        <span class="seal" aria-hidden="true"><b>A+</b><small>BBB</small></span>
+        <div class="txt"><strong>BBB Accredited Business, A+ rating.</strong> Customer reviews 5 out of 5, average of 8 reviews. <a href="https://www.bbb.org/us/ut/wellsville/profile/educational-consultant/legetty-1126-90040765" target="_blank" rel="noopener">See BBB profile</a></div>
+      </div>
+    </div>
+    <ul class="rev-list">
+        <li class="rev">
+          <figure>
+            <svg class="stars rev-stars" viewBox="0 0 100 20" role="img" aria-label="5 out of 5 stars"><defs><clipPath id="rs1"><rect x="0" y="0" width="100.0" height="20"/></clipPath></defs><g class="s-empty"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g><g class="s-full" clip-path="url(#rs1)"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g></svg>
+            <blockquote><p>Each member of the team was knowledgeable, professional and nice. We appreciate that there was always clear next steps and follow up though no one was pushy</p></blockquote>
+            <figcaption><strong>Jennifer Kornicks Askjaer</strong><span class="rev-src"><a href="https://www.trustpilot.com/review/legetty.com" target="_blank" rel="noopener">Trustpilot</a> · <time datetime="2026-05-24">May 24, 2026</time></span></figcaption>
+          </figure>
+        </li>
+        <li class="rev">
+          <figure>
+            <svg class="stars rev-stars" viewBox="0 0 100 20" role="img" aria-label="5 out of 5 stars"><defs><clipPath id="rs11"><rect x="0" y="0" width="100.0" height="20"/></clipPath></defs><g class="s-empty"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g><g class="s-full" clip-path="url(#rs11)"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g></svg>
+            <blockquote><p>The entire process felt incredibly educational and genuine [...] and we never felt pressured to continue.</p></blockquote>
+            <figcaption><strong>Rita T</strong><span class="rev-src"><a href="https://www.bbb.org/us/ut/wellsville/profile/educational-consultant/legetty-1126-90040765" target="_blank" rel="noopener">BBB</a> · <time datetime="2025-01-30">Jan 30, 2025</time></span></figcaption>
+          </figure>
+        </li>
+        <li class="rev">
+          <figure>
+            <svg class="stars rev-stars" viewBox="0 0 100 20" role="img" aria-label="5 out of 5 stars"><defs><clipPath id="rs2"><rect x="0" y="0" width="100.0" height="20"/></clipPath></defs><g class="s-empty"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g><g class="s-full" clip-path="url(#rs2)"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g></svg>
+            <blockquote><p>Most comprehensive way to save money for college and retirement that I have seen so far. This is not a one size fits all type of college planning company. They work with you on your situation to determine what would fit best.</p></blockquote>
+            <figcaption><strong>James McKinney</strong><span class="rev-src"><a href="https://www.trustpilot.com/review/legetty.com" target="_blank" rel="noopener">Trustpilot</a> · <time datetime="2025-12-01">Dec 1, 2025</time></span></figcaption>
+          </figure>
+        </li>
+        <li class="rev">
+          <figure>
+            <svg class="stars rev-stars" viewBox="0 0 100 20" role="img" aria-label="5 out of 5 stars"><defs><clipPath id="rs10"><rect x="0" y="0" width="100.0" height="20"/></clipPath></defs><g class="s-empty"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g><g class="s-full" clip-path="url(#rs10)"><polygon transform="translate(0 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(20 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(40 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(60 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/><polygon transform="translate(80 0)" points="10,1.2 12.6,7 18.9,7.4 14.1,11.5 15.6,17.7 10,14.4 4.4,17.7 5.9,11.5 1.1,7.4 7.4,7"/></g></svg>
+            <blockquote><p>Great team to work with. Very knowledgeable - they truly help you understand the pros and cons of each strategy. Their approach to college funding is innovative and eye opening.</p></blockquote>
+            <figcaption><strong>Laura R</strong><span class="rev-src"><a href="https://www.bbb.org/us/ut/wellsville/profile/educational-consultant/legetty-1126-90040765" target="_blank" rel="noopener">BBB</a> · <time datetime="2025-11-07">Nov 7, 2025</time></span></figcaption>
+          </figure>
+        </li>
+    </ul>
+    <p class="asof">Ratings as of October 2026.</p>
+  </div>
+</section>
+
+<!-- ===== GHL SECTION 05: videos ===== -->
+<!-- GHL: each card is a click-to-play facade (thumbnail link). The page script (ghl/99-footer-scripts.html) swaps it for the player iframe on click; without JS the link opens the video on YouTube/Vimeo. Keep the facade: do not paste raw embeds. -->
+<section id="videos" class="sec cfs-videos" data-ghl-section="05-videos" aria-labelledby="vid-h">
+  <div class="wrap">
+    <h2 class="sec-h" id="vid-h">Hear It From Families</h2>
+    <div class="cfs-vid-feat">
+      <div class="cfs-vid-media">
+        <a class="cfs-vid" href="https://youtu.be/UeqVZzVce5M" data-embed="https://www.youtube-nocookie.com/embed/UeqVZzVce5M?rel=0&amp;autoplay=1" data-title="Client Testimonial Supercut testimonial video" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/UeqVZzVce5M/maxresdefault.jpg" loading="lazy" decoding="async" width="1280" height="720" alt="Play video: Client Testimonial Supercut testimonial"><span class="cfs-vid-play" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span></a>
+      </div>
+      <div class="cfs-vid-cap">
+        <strong class="cfs-vid-name">Client Testimonial Supercut</strong>
+        <p>A few of our clients share their thoughts on working with us.</p>
+      </div>
+    </div>
+    <p class="cfs-vid-hint" aria-hidden="true">Swipe for more videos <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+    <ul class="cfs-vid-row" aria-label="More client videos">
+      <li>
+        <div class="cfs-vid-media">
+          <a class="cfs-vid" href="https://vimeo.com/1056972648" data-embed="https://player.vimeo.com/video/1056972648?byline=0&amp;portrait=0&amp;title=0&amp;autoplay=1" data-title="Chuck testimonial video" target="_blank" rel="noopener"><img src="https://i.vimeocdn.com/video/1982827983-42f6b37cc2740d4c269a6839602bc050f66dfc250817a56d4814991ba1bee716-d_1280?region=us" loading="lazy" decoding="async" width="1280" height="720" alt="Play video: Chuck testimonial"><span class="cfs-vid-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="cfs-vid-dur"><span class="sr-only">Length </span>3:36</span></a>
+        </div>
+        <div class="cfs-vid-cap">
+          <strong class="cfs-vid-name">Chuck</strong>
+          <blockquote><p>The College Funding Secrets plan has given my wife and I peace of mind and security in knowing that we're going to be able to send both of our kids to college and also be able to retire.</p></blockquote>
+        </div>
+      </li>
+      <li>
+        <div class="cfs-vid-media">
+          <a class="cfs-vid" href="https://vimeo.com/1056973739" data-embed="https://player.vimeo.com/video/1056973739?byline=0&amp;portrait=0&amp;title=0&amp;autoplay=1" data-title="Bill testimonial video" target="_blank" rel="noopener"><img src="https://i.vimeocdn.com/video/1982829811-70d4bc6be1b7e1a637085ed589d814d454cf00a6241d7f2e6dba2f091cf951f1-d_1280?region=us" loading="lazy" decoding="async" width="1280" height="720" alt="Play video: Bill testimonial"><span class="cfs-vid-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="cfs-vid-dur"><span class="sr-only">Length </span>3:47</span></a>
+        </div>
+        <div class="cfs-vid-cap">
+          <strong class="cfs-vid-name">Bill</strong>
+          <blockquote><p>I never thought I could keep my college savings and allow it to keep earning interest.</p></blockquote>
+        </div>
+      </li>
+      <li>
+        <div class="cfs-vid-media">
+          <a class="cfs-vid" href="https://vimeo.com/1052841306" data-embed="https://player.vimeo.com/video/1052841306?byline=0&amp;portrait=0&amp;title=0&amp;autoplay=1" data-title="Justin testimonial video" target="_blank" rel="noopener"><img src="https://i.vimeocdn.com/video/1977902392-ee25774958c3109e11025839c44dc799efca80b13a5119ca66040d411cd8681d-d_1280?region=us" loading="lazy" decoding="async" width="1280" height="720" alt="Play video: Justin testimonial"><span class="cfs-vid-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="cfs-vid-dur"><span class="sr-only">Length </span>4:41</span></a>
+        </div>
+        <div class="cfs-vid-cap">
+          <strong class="cfs-vid-name">Justin</strong>
+          <blockquote><p>Having a real plan for college costs gave us peace of mind and freedom we never thought possible.</p></blockquote>
+        </div>
+      </li>
+      <li>
+        <div class="cfs-vid-media">
+          <a class="cfs-vid" href="https://vimeo.com/1052839918" data-embed="https://player.vimeo.com/video/1052839918?byline=0&amp;portrait=0&amp;title=0&amp;autoplay=1" data-title="Sarah testimonial video" target="_blank" rel="noopener"><img src="https://i.vimeocdn.com/video/1977900093-90fec020d92dfbe7f7963f189c46e95976da87c3d2f2e2c287757bb5c87872b8-d_1280?region=us" loading="lazy" decoding="async" width="1280" height="720" alt="Play video: Sarah testimonial"><span class="cfs-vid-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="cfs-vid-dur"><span class="sr-only">Length </span>5:29</span></a>
+        </div>
+        <div class="cfs-vid-cap">
+          <strong class="cfs-vid-name">Sarah</strong>
+          <blockquote><p>I regret waiting so long to check this out [...] it's been a total game changer for our family.</p></blockquote>
+        </div>
+      </li>
+      <li>
+        <div class="cfs-vid-media">
+          <a class="cfs-vid" href="https://vimeo.com/1056961230" data-embed="https://player.vimeo.com/video/1056961230?byline=0&amp;portrait=0&amp;title=0&amp;autoplay=1" data-title="Kevin Harrington testimonial video" target="_blank" rel="noopener"><img src="https://i.vimeocdn.com/video/1982814854-a1edd5decb9e2b34c68ed95a4399cf939d6b52f57360b0ae4665d703610c9cf4-d_1280?region=us" loading="lazy" decoding="async" width="1280" height="720" alt="Play video: Kevin Harrington testimonial"><span class="cfs-vid-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span><span class="cfs-vid-dur"><span class="sr-only">Length </span>4:37</span></a>
+        </div>
+        <div class="cfs-vid-cap">
+          <strong class="cfs-vid-name">Kevin Harrington</strong>
+          <blockquote><p>I'm Kevin Harrington original shark from shark tank and I recommend these strategies. I wish I knew you when I was going to school.</p></blockquote>
+        </div>
+      </li>
+      <li>
+        <div class="cfs-vid-media">
+          <a class="cfs-vid" href="https://youtu.be/A0mwCc9JLQA" data-embed="https://www.youtube-nocookie.com/embed/A0mwCc9JLQA?rel=0&amp;autoplay=1" data-title="Micaela Karlson testimonial video" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/A0mwCc9JLQA/maxresdefault.jpg" loading="lazy" decoding="async" width="1280" height="720" alt="Play video: Micaela Karlson testimonial"><span class="cfs-vid-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span></a>
+        </div>
+        <div class="cfs-vid-cap">
+          <strong class="cfs-vid-name">Micaela Karlson</strong>
+        </div>
+      </li>
+    </ul>
+    <p class="cfs-vid-note">Testimonials reflect individual experiences. Results vary.</p>
+  </div>
+</section>
+
+<!-- ===== GHL SECTION 06: fit ===== -->
+<section id="fit" class="sec cfs-fit" data-ghl-section="06-fit" aria-labelledby="fit-h">
+  <div class="wrap">
+    <h2 class="sec-h" id="fit-h">This Review Is Built for Families Like Yours</h2>
+    <div class="cfs-fit-grid">
+      <div class="cfs-fit-card cfs-fit-yes">
+        <p class="cfs-fit-lead">It will be most useful if:</p>
+        <ul class="cfs-fit-list">
+            <li><span class="cfs-ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Your household earns about $250,000 or more, or pays about $30,000 or more a year in federal taxes.</span></li>
+            <li><span class="cfs-ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>You expect to help pay for college.</span></li>
+            <li><span class="cfs-ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>You have college costs coming up or already underway.</span></li>
+            <li><span class="cfs-ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>You have savings, investments, retirement contributions, or annual cash flow that should be looked at together.</span></li>
+            <li><span class="cfs-ic" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>You want to weigh suitability, risk, liquidity, timing, and tax consequences before acting.</span></li>
+        </ul>
+      </div>
+      <div class="cfs-fit-card cfs-fit-no">
+        <h3>It's Probably Not a Fit If</h3>
+        <ul class="cfs-fit-list">
+            <li><span class="cfs-ic" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><span>You don't expect to help pay for college.</span></li>
+            <li><span class="cfs-ic" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><span>You're looking for guaranteed tax savings, investment returns, cash flow, or financial aid.</span></li>
+            <li><span class="cfs-ic" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><span>You want to act on a tax or investment idea without professional review.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GHL SECTION 07: numbers ===== -->
+<section id="numbers" class="sec cfs-numbers" data-ghl-section="07-numbers" aria-labelledby="num-h">
+  <div class="wrap">
+    <div class="cfs-numbers-grid">
+      <div>
+        <h2 class="sec-h" id="num-h">Have These Rough Numbers Ready</h2>
+        <p class="cfs-numbers-lead">Rough numbers are fine. They make the 30 minutes count.</p>
+      </div>
+      <ul class="cfs-checklist">
+          <li><span class="cfs-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2.2"/></svg></span><span>Approximate household income</span></li>
+          <li><span class="cfs-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2.2"/></svg></span><span>Approximate annual federal tax bill</span></li>
+          <li><span class="cfs-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2.2"/></svg></span><span>Expected annual college cost</span></li>
+          <li><span class="cfs-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2.2"/></svg></span><span>Savings or investments set aside for college</span></li>
+          <li><span class="cfs-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2.2"/></svg></span><span>Approximate annual available cash flow</span></li>
+          <li><span class="cfs-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2.2"/></svg></span><span>Current annual retirement contributions</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GHL SECTION 08: lance ===== -->
+<section id="lance" class="sec cfs-lance" data-ghl-section="08-lance" aria-labelledby="lance-h">
+  <div class="wrap">
+    <div class="cfs-lance-grid">
+      <img class="cfs-photo" src="assets/lance-family.webp" alt="Lance Morgan with his family" width="840" height="840" loading="lazy" decoding="async">
+      <div class="cfs-lance-head">
+        <p class="eyebrow">MEET THE FOUNDER</p>
+        <h2 class="sec-h" id="lance-h">Lance Morgan</h2>
+      </div>
+      <div class="cfs-lance-body">
+        <p class="cfs-lance-bio">Lance is a best-selling author and a college-funding strategist with more than 20 years in the financial industry, and he's a dad of five. For years he saved in 529s and taught clients to do the same. As his own kids got closer to college, he saw that tuition couldn't be planned apart from taxes and retirement, and the tax side is where he found a better way to pay. That's the framework the team walks through with you on the review.</p>
+        <a class="btn" href="#book">
+          Pick a Time for My Review Call
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GHL SECTION 09: faq ===== -->
+<section id="faq" class="sec cfs-faq" data-ghl-section="09-faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="cfs-faq-grid">
+      <h2 class="sec-h" id="faq-h">Common Questions</h2>
+      <div class="cfs-faq-list">
+        <details class="cfs-q" open>
+          <summary><span class="cfs-q-t">Will this really work for someone like me?</span><span class="cfs-q-ic" aria-hidden="true"></span></summary>
+          <div class="cfs-q-a"><p>That's exactly why the first conversation exists.</p></div>
+        </details>
+        <details class="cfs-q">
+          <summary><span class="cfs-q-t">I'm a W-2 employee. Does this still apply?</span><span class="cfs-q-ic" aria-hidden="true"></span></summary>
+          <div class="cfs-q-a"><p>It can. The framework includes tax-planning concepts that may apply to W-2 employees, 1099 earners, and business owners. Whether a strategy fits depends on your situation and the rules involved.</p></div>
+        </details>
+        <details class="cfs-q">
+          <summary><span class="cfs-q-t">Do I have to leave my CPA?</span><span class="cfs-q-ic" aria-hidden="true"></span></summary>
+          <div class="cfs-q-a"><p>Not necessarily. Where it makes sense, your existing CPA can stay part of the process.</p></div>
+        </details>
+        <details class="cfs-q">
+          <summary><span class="cfs-q-t">I don't have time for another project.</span><span class="cfs-q-ic" aria-hidden="true"></span></summary>
+          <div class="cfs-q-a"><p>Neither do most of the families we work with. That's one of the reasons our model exists.</p></div>
+        </details>
+        <details class="cfs-q">
+          <summary><span class="cfs-q-t">How much money do I need?</span><span class="cfs-q-ic" aria-hidden="true"></span></summary>
+          <div class="cfs-q-a"><p>Some strategies require meaningful capital. Others have different requirements. The first conversation is where we look at what resources are available and whether these strategies are realistic for your situation.</p></div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GHL SECTION 10: press ===== -->
+<section id="press" class="sec press" data-ghl-section="10-press" aria-labelledby="press-h">
+  <div class="wrap">
+    <h2 class="sec-h" id="press-h">In the News</h2>
+    <ul class="press-grid">
+          <li class="pc"><a href="https://podcasts.apple.com/us/podcast/college-without-the-debt-smart-funding-secrets-for-parents/id1844377860?i=1000730428301" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1311f60646195fbb.png" alt="Parenting Teens Today feature on Lance Morgan" width="856" height="1104" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.theamericanreporter.com/retirement-proofing-college-how-creative-college-funding-helps-families-fund-education-without-sacrificing-long-term-security/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1f68d13183771c42.png" alt="The American Reporter feature on Lance Morgan" width="860" height="1454" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://washingtonindependent.org/how-to-pay-for-college-tuition/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e0b47f7a877555fa42b9e.png" alt="The Washington Independent feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://epodcastnetwork.com/college-funding-secrets-founder-breaks-down-the-intersection-of-taxes-real-estate-and-tuition-planning/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123f7305aa7318707385.png" alt="EPN Enterprise Podcast Network feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.cnet.com/tech/services-and-software/w2-vs-1099-difference/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123f017707f5f7c15910.png" alt="CNET feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.gobankingrates.com/taxes/tax-laws/im-financial-advisor-capital-gains-moves-that-can-quietly-increase-your-tax-bill/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/69b2b049bfc81fc4dcb16b66.png" alt="GOBankingRates feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc dk"><a href="https://www.marketwatch.com/picks/i-have-1-4m-in-cash-and-2-5m-invested-but-my-adviser-who-i-pay-0-5-seems-like-a-set-it-and-forget-it-type-of-guy-what-now-69044d22" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123fa41b8773428bd9a0.png" alt="MarketWatch feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc dk"><a href="https://www.mpamag.com/us/mortgage-industry/market-updates/what-brokers-need-to-know-before-clients-use-401k-funds-for-a-down-payment/568406" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/69d8e48dd7871cddf7075b60.png" alt="MPA (Mortgage Professional America) feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+    </ul>
+    <details class="more">
+      <summary><span class="when-closed">See all 32 features</span><span class="when-open">Show fewer features</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <ul class="press-grid">
+          <li class="pc mb"><a href="https://www.marketwatch.com/picks/i-have-1-4m-in-cash-and-2-5m-invested-but-my-adviser-who-i-pay-0-5-seems-like-a-set-it-and-forget-it-type-of-guy-what-now-69044d22" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123fa41b8773428bd9a0.png" alt="MarketWatch feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc mb"><a href="https://www.mpamag.com/us/mortgage-industry/market-updates/what-brokers-need-to-know-before-clients-use-401k-funds-for-a-down-payment/568406" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/69d8e48dd7871cddf7075b60.png" alt="MPA (Mortgage Professional America) feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://wbznewsradio.iheart.com/featured/nightside-with-dan-rea/content/2025-11-21-1002-nightside-with-dan-rea-nightside-news-update-112125/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cbf7a877d8c8a3f4ae.png" alt="WBZ NewsRadio 1030 feature on Lance Morgan" width="860" height="1330" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.realtor.com/advice/finance/emergency-savings-insurance-crisis-homeowners/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1f68d1aec6771c45.png" alt="Realtor.com feature on Lance Morgan" width="868" height="1318" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://soundcloud.com/kmet-1490-am/reverse-your-thinking-december" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cbf7a877e0dba3f4af.png" alt="KMET 1490 AM feature on Lance Morgan" width="860" height="1308" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://podcasts.apple.com/us/podcast/dr-jason-r-williams-cynthia-rivard-lance-morgan-ig-live/id1678157057?i=1000733018168" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cbf7a877954ca3f4ad.png" alt="Office Hours podcast with Dr. Jason R. Williams feature on Lance Morgan" width="860" height="1106" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://podcasts.apple.com/us/podcast/how-this-7-figure-entrepreneur-grew-his-online-empire/id1495662075?i=1000725725609" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1fd82745e11641f3.png" alt="Profit Your Knowledge feature on Lance Morgan" width="858" height="1104" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://podcasts.apple.com/us/podcast/lance-morgan-college-funding-secrets-mark-stephen-pooler/id994705264?i=1000720934293" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb66e7ca8b8f57aa4c.png" alt="Business Innovators Radio feature on Lance Morgan" width="862" height="1462" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.fa-mag.com/news/mortgage-rates-drop-again--should-you-buy-now-84893.html" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1311f61493195fb9.png" alt="Financial Advisor magazine feature on Lance Morgan" width="852" height="1456" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://calbizjournal.com/behind-the-scenes-of-college-funding-secrets-real-families-real-savings/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e0b58f7a877b669a42d50.png" alt="California Business Journal feature on Lance Morgan" width="854" height="1328" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.kulr8.com/news/state/come-to-jesus-moment-are-we-ready-to-deal-with-social-securitys-looming-fiscal-cliff/article_69a45ea8-d4ef-50c1-b203-b0c1fbf7785d.html" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1f68d12810771c43.png" alt="NonStop Local feature on Lance Morgan" width="854" height="1336" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.reflector.com/news/local/come-to-jesus-moment-are-we-ready-to-deal-with-social-securitys-looming-fiscal-cliff/article_2dafa874-b0e7-5754-9a50-fd162ceea277.html" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1f68d1af98771c44.png" alt="The Daily Reflector feature on Lance Morgan" width="858" height="1336" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.newsbreak.com/the-daily-reflector-1593112/4317893655587-come-to-jesus-moment-are-we-ready-to-deal-with-social-security-s-looming-fiscal-cliff" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1311f6738f195fba.png" alt="NewsBreak feature on Lance Morgan" width="858" height="1332" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://thelosangelestribune.com/2025/10/27/creative-college-funding-the-only-done-with-you-program-combining-tax-real-estate-and-financial-aid/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1fd827967c1641f4.png" alt="The Los Angeles Tribune feature on Lance Morgan" width="848" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://programminginsider.com/creative-college-funding-the-only-done-with-you-program-combining-tax-real-estate-and-financial-aid/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/697e09cb1311f62d14195fbc.png" alt="Programming Insider feature on Lance Morgan" width="868" height="1330" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://finance.yahoo.com/news/financial-expert-smartest-way-boomers-150759170.html" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123f01770704efc15911.png" alt="Yahoo Finance feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://groovemoney.org/2025-student-loan-changes-explained-what-they-mean-for-borrowers" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123fa41b87c80d8bd99f.png" alt="GrooveMoney feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.dailyscanner.com/real-estate-investing-tips-is-buying-a-condo-a-better-investment-strategy-than-a-401k/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123f52c952edb8ee5089.png" alt="Daily Scanner feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://usawire.com/investor-tips-real-estate-investing-with-a-50-year-mortgage/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123fa41b871f5e8bd9a1.png" alt="USA Wire feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://businesspartnermagazine.com/home-loan-strategies-borrowing-from-401k-for-down-payment/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123f7f6dcf0af4ffcbcd.png" alt="Business Partner Magazine feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.youtube.com/watch?v=3hsb1UPX2tI" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123f0177070a3ac1590f.png" alt="The Business Roundup feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.onnj.com/videos/home-payments/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/698c123f01770744c3c1590e.png" alt="ON NJ feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://finance.yahoo.com/news/m-financial-advisor-7-capital-141310303.html" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/69b2b049bfc81f4e7db16b65.png" alt="Yahoo Finance feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.gobankingrates.com/home-loans/refinance/im-financial-advisor-when-retirees-should-refinance-mortgages-in-2026/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/69d8e48d23917331fbbaa1e4.png" alt="GOBankingRates feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.lifehealth.com/401k-vs-real-estate/" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/69d8e48d019dc508d3fb811e.png" alt="eNewsLink feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+          <li class="pc"><a href="https://www.youtube.com/watch?v=eGH_gKICR5Y" target="_blank" rel="noopener"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/drk0ArGlymV297Q7swkl/media/69d8e48d019dc508d3fb811f.png" alt="CNTV feature on Lance Morgan" width="856" height="1334" loading="lazy" decoding="async"></a></li>
+      </ul>
+    </details>
+    <div class="also">
+      <h3>Also featured</h3>
+      <ul>
+        <li><a href="https://moneytreepodcast.com/real-estate-to-reduce-college-costs-lance-morgan-818/" target="_blank" rel="noopener">
+          <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="2.2"/><path d="M5.5 11a6.5 6.5 0 0013 0M12 17.5V21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+          <span class="t"><strong>Using Real Estate to Reduce College Costs</strong><span>Money Tree Podcast</span></span>
+          <svg class="go" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a></li>
+        <li><a href="https://www.youtube.com/watch?v=T41LSiwIk5w" target="_blank" rel="noopener">
+          <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 5.5v13l10.5-6.5L8 5.5z" fill="currentColor"/></svg></span>
+          <span class="t"><strong>Solutions to use your Tax Bill to pay for college</strong><span>Money Matters TV</span></span>
+          <svg class="go" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GHL SECTION 11: closer ===== -->
+<section id="closer" class="sec closer" data-ghl-section="11-closer" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closer-in">
+      <h2 id="close-h">You Don't Need to Figure It Out Today</h2>
+      <p>There's no need to choose a strategy today. You're simply taking the next logical step: finding out what may apply to your family.</p>
+      <a class="btn" href="#book">
+        Book My Free Call
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== GHL SECTION 12: footer ===== -->
+<section id="site-footer" class="cfs-footer" data-ghl-section="12-footer" aria-label="Site footer">
+  <footer class="wrap" role="contentinfo">
+    <img src="assets/legetty-navy.png" alt="Legetty" width="660" height="214" loading="lazy">
+    <p class="legal">This page is for educational purposes only and does not provide tax, legal, investment, accounting, or financial advice. Tax outcomes, financial aid eligibility, investment performance, cash flow, and other results depend on individual circumstances and are not guaranteed. Any strategy should be reviewed with qualified tax, legal, and financial professionals before implementation.</p>
+    <div class="cfs-footer-row">
+      <p>Copyright © 2026. College Funding Education, LLC. All Rights Reserved.</p>
+      <p class="cfs-footer-links"><a href="https://collegefundingsecrets.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a><span class="bar" aria-hidden="true">|</span><a href="https://collegefundingsecrets.com/terms-of-service" target="_blank" rel="noopener">Terms of Service</a></p>
+    </div>
+  </footer>
+</section>
+
+<script>
+(function () {
+  // CFS booking page scripts. Progressive enhancement only: with JS off every step is stacked and readable,
+  // and every video link opens the video. Safe when the page's blocks are separate GHL elements: it finds
+  // them by ID/class, runs on DOMContentLoaded (or at once if the DOM is ready), and retries briefly in case
+  // GHL renders the custom-code blocks after this script runs.
+  if (window.cfsLpBooted) return;
+  window.cfsLpBooted = true;
+
+  var ROTATE_MS = 5000;
+  var reduceMq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+
+  // ---- Reduce / Offset / Fund tabs: auto-advance every 5s until the visitor uses a tab ----
+  function initSteps(root) {
+    if (!root || root.getAttribute('data-cfs-ready') === '1') return !!root;
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+    if (!tabs.length || panels.indexOf(null) !== -1) return false;
+    root.setAttribute('data-cfs-ready', '1');
+    var dots = Array.prototype.slice.call(root.querySelectorAll('.dots span'));
+    var current = 0, timer = null, startedAt = 0, remaining = ROTATE_MS;
+    var stopped = false, hovering = false, focused = false;
+
+    function select(i, focus) {
+      current = i;
+      tabs.forEach(function (t, j) {
+        var on = j === i;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+        if (dots[j]) dots[j].className = on ? 'on' : '';
+      });
+      if (focus) tabs[i].focus();
+    }
+    function clearTimer() { if (timer) { clearTimeout(timer); timer = null; } }
+    function schedule(ms) {
+      clearTimer();
+      remaining = ms;
+      startedAt = Date.now();
+      timer = setTimeout(advance, ms);
+    }
+    function advance() {
+      timer = null;
+      if (stopped) return;
+      select((current + 1) % tabs.length, false);
+      schedule(ROTATE_MS);
+    }
+    function pause() {
+      if (stopped) return;
+      if (timer) { remaining = Math.max(0, remaining - (Date.now() - startedAt)); clearTimer(); }
+      root.classList.add('is-paused');
+    }
+    function resume() {
+      if (stopped || hovering || focused || timer) return;
+      root.classList.remove('is-paused');
+      schedule(remaining);
+    }
+    function stop() {
+      stopped = true;
+      clearTimer();
+      root.classList.remove('is-rotating', 'is-paused');
+    }
+
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { stop(); select(i, false); });
+      t.addEventListener('keydown', function (e) {
+        var k = e.key, n = tabs.length;
+        if (k === 'ArrowRight') { e.preventDefault(); stop(); select((i + 1) % n, true); }
+        else if (k === 'ArrowLeft') { e.preventDefault(); stop(); select((i - 1 + n) % n, true); }
+        else if (k === 'Home') { e.preventDefault(); stop(); select(0, true); }
+        else if (k === 'End') { e.preventDefault(); stop(); select(n - 1, true); }
+      });
+    });
+    root.addEventListener('mouseenter', function () { hovering = true; pause(); });
+    root.addEventListener('mouseleave', function () { hovering = false; resume(); });
+    root.addEventListener('focusin', function () { focused = true; pause(); });
+    root.addEventListener('focusout', function () {
+      setTimeout(function () {
+        if (root.contains(document.activeElement)) return;
+        focused = false;
+        resume();
+      }, 0);
+    });
+
+    select(0, false);
+    root.classList.add('cfs-js');
+    if (reduceMq && reduceMq.matches) return true; // no auto-rotation at all under reduced motion
+    if (reduceMq) {
+      var onChange = function (e) { if (e.matches) stop(); };
+      if (reduceMq.addEventListener) reduceMq.addEventListener('change', onChange);
+      else if (reduceMq.addListener) reduceMq.addListener(onChange);
+    }
+    root.classList.add('is-rotating');
+    schedule(ROTATE_MS);
+    return true;
+  }
+
+  // ---- Video facades: no iframe exists until a click (one delegated listener, so late-rendered blocks work) ----
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // keep new-tab clicks
+    var a = e.target && e.target.closest ? e.target.closest('a.cfs-vid[data-embed]') : null;
+    if (!a) return;
+    var src = a.getAttribute('data-embed');
+    if (!src) return;
+    e.preventDefault();
+    var f = document.createElement('iframe');
+    f.className = 'cfs-vid-frame';
+    f.src = src;
+    f.title = a.getAttribute('data-title') || 'Testimonial video';
+    f.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+    f.setAttribute('allowfullscreen', '');
+    a.parentNode.replaceChild(f, a);
+    f.focus();
+  });
+
+  var tries = 0;
+  function boot() {
+    if (initSteps(document.getElementById('steps'))) return;
+    if (tries++ < 40) setTimeout(boot, 250); // up to ~10s for late-rendered GHL blocks
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+</body>
+</html>

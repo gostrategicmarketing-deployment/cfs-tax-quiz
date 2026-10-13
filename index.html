@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Is the Tax Scholarship a Fit for Your Family?</title>
+<title>3 Steps to Pay for College Without Sacrificing Your Financial Future</title>
 <meta name="description" content="">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,13 +81,7 @@ head.appendChild(script);
 </script>
 
 <script>
-/* Theme tokens come from the config so there is exactly one place colours live. */
 (function () {
-  var th = ((window.FUNNEL || {}).brand || {}).theme || {};
-  var css = Object.keys(th).map(function (k) {
-    return '--' + k.replace(/[A-Z]/g, function (m) { return '-' + m.toLowerCase(); }) + ':' + th[k];
-  }).join(';');
-  if (css) document.documentElement.setAttribute('style', css);
   var b = (window.FUNNEL || {}).brand || {};
   if (b.title) document.title = b.title;
   if (b.description) {
@@ -100,35 +94,47 @@ head.appendChild(script);
 
 <body>
 
-<div class="topbar"><img id="brandLogo" alt="College Funding Secrets" width="220" height="44"></div>
+<div class="topbar"><div class="wrap"><img src="assets/logo/legetty-white.png" alt="Legetty" width="660" height="214"></div></div>
 
 <!-- ============ HERO ============
-     The quiz lives INSIDE the hero, so there is no scroll between reading the
-     promise and answering the first question. Three states swap in the panel:
-     quiz, qualified hand-off, not-a-fit hand-off. -->
+     The quiz lives INSIDE the hero, in a white card. On phones the card sits
+     directly under the headline so the first question is on the first screen.
+     Three states swap inside the card: quiz, qualified hand-off, not-a-fit
+     hand-off. -->
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="panel">
-      <div id="heroHead">
+    <div class="hero-grid">
+      <div class="hero-top">
+        <span class="kicker">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 4h6M9 4a2 2 0 0 0-2 2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1a2 2 0 0 0-2-2M8.5 13l2.3 2.3 4.7-4.8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="heroKicker"></span>
+        </span>
         <h1 id="heroH1"></h1>
-        <p class="sub" id="heroSub"></p>
-        <p class="introNote" id="introNote"></p>
       </div>
 
-      <section id="quiz" class="quiz" aria-label="Qualifying questions"></section>
+      <div class="quiz-card">
+        <div id="heroHead"><p class="introNote" id="introNote"></p></div>
 
-      <section id="resOk" class="result" hidden aria-live="polite">
-        <div class="spinner" aria-hidden="true"></div>
-        <h2></h2>
-        <p></p>
-        <a class="cta" href="#"></a>
-      </section>
+        <section id="quiz" class="quiz" aria-label="Quiz questions"></section>
 
-      <section id="resDq" class="result" hidden aria-live="polite">
-        <h2></h2>
-        <p></p>
-        <a class="cta" href="#"></a>
-      </section>
+        <section id="resOk" class="result" hidden aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <h2></h2>
+          <p></p>
+          <a class="cta" href="#"></a>
+        </section>
+
+        <section id="resDq" class="result" hidden aria-live="polite">
+          <h2></h2>
+          <p></p>
+          <a class="cta" href="#"></a>
+        </section>
+      </div>
+
+      <div class="hero-more">
+        <p class="sub" id="heroSub"></p>
+        <p class="qual" id="heroQual"></p>
+      </div>
     </div>
   </div>
 </header>
@@ -138,8 +144,14 @@ head.appendChild(script);
 <div id="sections"></div>
 
 <footer class="foot">
-  <p id="footNote"></p>
-  <p id="footBrand"></p>
+  <div class="wrap">
+    <img src="assets/logo/legetty-navy.png" alt="Legetty" width="660" height="214" loading="lazy">
+    <p class="legal">This page is for educational purposes only and does not provide tax, legal, investment, accounting, or financial advice. Tax outcomes, financial aid eligibility, investment performance, cash flow, and other results depend on individual circumstances and are not guaranteed. Any strategy should be reviewed with qualified tax, legal, and financial professionals before implementation.</p>
+    <div class="foot-row">
+      <p>Copyright © 2026. College Funding Education, LLC. All Rights Reserved.</p>
+      <p><a href="https://collegefundingsecrets.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a><span class="bar" aria-hidden="true">|</span><a href="https://collegefundingsecrets.com/terms-of-service" target="_blank" rel="noopener">Terms of Service</a></p>
+    </div>
+  </div>
 </footer>
 
 <script src="funnel.js"></script>
@@ -156,38 +168,32 @@ head.appendChild(script);
   }
 
   var build = {
-    /* Press: an outlet logo strip, then the client's own media cards as images.
-       Images, not retyped text, so nothing on the page can drift from what the
-       outlet actually ran. */
+    steps: function (s) {
+      return '<section class="sec white"><div class="inner"><h2 class="sec-h">' + esc(s.title) + '</h2><div class="grid">' +
+        (s.items || []).map(function (i, n) {
+          return '<div class="cell"><span class="tag">Step ' + (n + 1) + '</span><h3>' + esc(i.title) + '</h3><p>' + esc(i.body) + '</p></div>';
+        }).join('') + '</div></div></section>';
+    },
+    /* Press: outlet logos only. */
     press: function (s) {
-      var logos = s.logos || [], cards = s.cards || [];
-      if (!logos.length && !cards.length) return '';
-      return '<section class="sec press"><div class="inner">' +
+      var logos = s.logos || [];
+      if (!logos.length) return '';
+      return '<section class="press"><div class="inner">' +
         (s.title ? '<p class="eyebrow">' + esc(s.title) + '</p>' : '') +
-        (logos.length ? '<div class="logos">' + logos.map(function (l) {
+        '<div class="logos">' + logos.map(function (l) {
           return '<img src="' + esc(l.src) + '" alt="' + esc(l.alt) + '" loading="lazy">';
-        }).join('') + '</div>' : '') +
-        (cards.length ? '<div class="cards">' + cards.map(function (c) {
-          return '<figure class="pcard"><img src="' + esc(c.src) + '" alt="' + esc(c.alt) + '" loading="lazy"></figure>';
-        }).join('') + '</div>' : '') +
-        '</div></section>';
+        }).join('') + '</div></div></section>';
     },
     covers: function (s) {
-      return '<section class="sec band"><div class="inner"><h2>' + esc(s.title) + '</h2><div class="grid">' +
+      return '<section class="sec"><div class="inner"><h2 class="sec-h">' + esc(s.title) + '</h2><div class="grid">' +
         (s.items || []).map(function (i, n) {
           return '<div class="cell"><span class="num">' + (n + 1) + '</span><h3>' + esc(i.title) + '</h3><p>' + esc(i.body) + '</p></div>';
-        }).join('') + '</div></div></section>';
-    },
-    proof: function (s) {
-      if (!(s.items || []).length) return '';
-      return '<section class="band sec"><div class="inner"><h2>' + esc(s.title) + '</h2><div class="grid">' +
-        s.items.map(function (i) {
-          return '<blockquote class="cell"><p>' + esc(i.quote) + '</p>' +
-            '<cite>' + esc(i.who || '') + '</cite></blockquote>';
-        }).join('') + '</div></div></section>';
+        }).join('') + '</div>' +
+        (s.note ? '<p class="secnote">' + esc(s.note) + '</p>' : '') +
+        '</div></section>';
     },
     faq: function (s) {
-      return '<section class="sec"><div class="inner narrow"><h2>' + esc(s.title) + '</h2>' +
+      return '<section class="sec white"><div class="inner narrow"><h2 class="sec-h">' + esc(s.title) + '</h2>' +
         (s.items || []).map(function (i) {
           return '<details class="faq"><summary>' + esc(i.q) + '</summary><p>' + esc(i.a) + '</p></details>';
         }).join('') + '</div></section>';
@@ -211,19 +217,10 @@ head.appendChild(script);
     });
   });
 
-  var logo = document.getElementById('brandLogo');
-  if (logo && CFG.brand.logo) logo.src = CFG.brand.logo;
-  var note = document.getElementById('introNote');
-  if (note && CFG.quiz.intro) note.textContent = CFG.quiz.intro;
-  var fn = document.getElementById('footNote');
-  if (fn && CFG.footer) fn.textContent = CFG.footer;
-  var fb = document.getElementById('footBrand');
-  if (fb) fb.textContent = '© ' + new Date().getFullYear() + ' College Funding Education, LLC';
-
-  var left = (document.body.textContent.match(/\[(CLAIM|NAME|PROOF|HEADING|ANSWER|ONE SENTENCE|RATING|PLATFORM|COUNT)[^\]]*\]/g) || []);
-  if (left.length) {
-    console.warn('[funnel] ' + left.length + ' unfilled placeholder(s) still on the page: ' + left.slice(0, 6).join(', '));
-  }
+  function text(id, v) { var n = document.getElementById(id); if (n && v) n.textContent = v; }
+  text('introNote', CFG.quiz.intro);
+  text('heroKicker', CFG.kicker);
+  text('heroQual', CFG.qualifier);
 })();
 </script>
 </body>
