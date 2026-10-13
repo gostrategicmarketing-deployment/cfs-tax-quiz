@@ -46,9 +46,11 @@ p{margin:0}
 
 /* ---- header: logo only, CFS blue ------------------------------------------ */
 .topbar{background:var(--blue)}
-.topbar .wrap{display:flex;align-items:center;height:64px}
+.topbar .wrap{display:flex;align-items:center;justify-content:center;height:64px}
 .topbar img{height:40px;width:auto}
-@media(min-width:980px){.topbar .wrap{height:84px}.topbar img{height:48px}}
+/* Phones and tablets: everything in the hero is centred, so the logo sits on the same centre line.
+   Desktop: the hero copy is left-aligned, so the logo lines up with its left edge. */
+@media(min-width:980px){.topbar .wrap{height:84px;justify-content:flex-start}.topbar img{height:48px}}
 
 /* ---- hero ------------------------------------------------------------------
  * Phones: kicker + headline, then the quiz card, then the supporting copy, so
@@ -92,6 +94,19 @@ p{margin:0}
 .hero .sub{font-size:16px;line-height:1.5;font-weight:500;color:var(--ink);max-width:36em;margin:0 auto;text-wrap:balance}
 .qual{margin-top:12px;font-size:14px;line-height:1.45;font-weight:500;color:var(--ink);text-wrap:balance}
 
+/* small phones: pull the first question up onto the first screen */
+@media(max-width:400px){
+  .topbar .wrap{height:56px}
+  .topbar img{height:36px}
+  .hero-grid{gap:16px;padding-top:8px}
+  .hero h1{font-size:1.6rem;margin-top:10px}
+  .hook{font-size:14.5px;margin-top:8px}
+  .pieces{margin-top:10px}
+  .pieces li{padding:7px 9px 8px;font-size:11px}
+  .quiz-card{padding-top:14px}
+  .introNote{margin-bottom:8px}
+  .qzprog{margin-bottom:14px}
+}
 @media(min-width:640px){
   .hook{font-size:18px;margin-top:14px}
   .pieces{margin-top:18px;gap:5px}
@@ -125,7 +140,7 @@ p{margin:0}
 .introNote{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);margin-bottom:12px}
 
 /* min-height holds the page still as slides of different heights swap. */
-.quiz{position:relative;min-height:340px}
+.quiz{position:relative;min-height:340px;scroll-margin-top:18px}
 .qzprog{margin-bottom:18px}
 .qzmeta{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
 .qztrack{height:6px;background:var(--tint);border-radius:3px;overflow:hidden}

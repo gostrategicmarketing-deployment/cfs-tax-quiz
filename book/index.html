@@ -847,6 +847,10 @@
   @media (max-width: 639px) { img.cfs-photo { width: 100%; max-width: 360px; } }
   @media (min-width: 980px) { img.cfs-photo { max-width: 420px; } }
 
+  .q-prefill-top { display: none; }
+  @media (max-width: 759px) {
+    .q-prefill-top:not([hidden]) { display: block; margin: 0 10px 12px; text-align: center; font-size: 15.5px; font-weight: 600; color: var(--navy); text-wrap: balance; }
+  }
   /* quiz hand-off list inside the booking card */
   .q-pieces { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
   .q-pieces[hidden] { display: none; }
@@ -977,6 +981,8 @@
       <div class="widget-col">
         <!-- GHL: live Tax & College Opportunity Review Call calendar (inline, full width). GHL's widget renders its own header. -->
         <!-- GHL: rename the calendar "Tax Scholarships 1 on 1 mtg" to "Tax & College Opportunity Review Call" in Calendars > Settings so the widget header matches -->
+        <!-- phones only: the "already filled in" reassurance sits above the calendar, because the agenda block drops below it -->
+        <p class="q-prefill-top" id="q-prefill-top" hidden>Your name and email are already filled in. Just pick a time.</p>
         <div class="cfs-cal">
           <iframe src="https://bookings.collegefundingsecrets.com/widget/booking/jz4PWYKlNfHjOEj0p1p5" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="jz4PWYKlNfHjOEj0p1p5_cfs" class="cfs-cal-frame" title="Book a Tax &amp; College Opportunity Review Call"></iframe>
           <script>
@@ -986,7 +992,7 @@
             ['first_name', 'last_name', 'email'].forEach(function (k) { if (c[k]) q.set(k, c[k]); });
             var s = q.toString().replace(/\+/g, '%20');
             if (f && s) f.src = f.src.split('?')[0] + '?' + s;
-            if (c.email) { var p = document.getElementById('q-prefill'); if (p) p.hidden = false; }
+            if (c.email) { ['q-prefill', 'q-prefill-top'].forEach(function (id) { var p = document.getElementById(id); if (p) p.hidden = false; }); }
             var k = document.getElementById('q-kicker'), n = (c.first_name || '').replace(/\s+/g, ' ');
             if (k && n && n.length <= 14) k.textContent = n + ', your answers line up.';
           })();
