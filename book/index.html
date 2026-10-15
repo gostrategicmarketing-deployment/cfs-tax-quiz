@@ -323,7 +323,7 @@
     box-shadow: 0 18px 40px rgba(7, 43, 83, 0.28);
   }
   .tablist { display: none; gap: 8px; }
-  .steps.cfs-js .tablist { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .steps.cfs-js .tablist { display: grid; grid-template-columns: repeat(2, 1fr); }
   .tab {
     position: relative;
     appearance: none;
@@ -340,7 +340,7 @@
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   }
   .tab .n { font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
-  .tab .w { font-family: var(--font-head); font-weight: 800; font-size: 17px; margin-top: 3px; }
+  .tab .w { font-family: var(--font-head); font-weight: 800; font-size: 16px; line-height: 1.2; margin-top: 3px; }
   .tab:hover { border-color: var(--white); }
   .tab:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
   .tab[aria-selected="true"] { background: var(--green); border-color: var(--green); color: var(--navy); }
@@ -393,7 +393,7 @@
   @media (min-width: 980px) {
     .steps { padding: 22px; margin-bottom: 6px; }
     .tab { min-height: 60px; }
-    .tab .w { font-size: 19px; }
+    .tab .w { font-size: 17px; }
   }
 
   /* =====================================================================
@@ -881,7 +881,7 @@
           <span id="q-kicker">Good news. Your answers line up.</span>
         </span>
         <h1 class="h1" id="hero-h"><span class="lead-in">You Qualify for a Free</span> <span class="deep">Tax &amp; College Opportunity Review Call</span></h1>
-        <p class="sub">Based on your quiz answers, your family is a fit for a one-on-one review. Pick a time below and we'll show you how the 3 steps to pay for college without sacrificing your financial future could apply to you.</p>
+        <p class="sub">Based on your quiz answers, your family is a fit for a one-on-one review. Pick a time below and we'll show you how the 4 pieces of paying for college fit together for your family.</p>
         <div class="cta-row">
           <a class="btn" href="#book">
             Pick a Time for My Review Call
@@ -907,29 +907,34 @@
       <!-- ===== steps (part of GHL SECTION 02: hero) ===== -->
       <!-- GHL: steps live inside the hero row in this design, so they ship inside ghl/02-hero.html (one custom-code block) -->
       <!-- Right column of the hero row on desktop; directly under the hero copy on mobile.
-           Without JS all three steps render stacked; with JS they become Reduce / Offset / Fund tabs that
+           Without JS all four pieces render stacked; with JS they become four tabs that
            auto-advance every 5s (paused on hover/focus, stopped once a tab is used, off under reduced motion). -->
-      <section class="steps" id="steps" data-ghl-section="02-hero-steps" aria-label="The three steps">
-        <div class="tablist" role="tablist" aria-label="The three steps">
-          <button class="tab" role="tab" id="tab-1" aria-controls="step-1" aria-selected="true" tabindex="0"><span class="n">Step 1</span><span class="w">Reduce</span></button>
-          <button class="tab" role="tab" id="tab-2" aria-controls="step-2" aria-selected="false" tabindex="-1"><span class="n">Step 2</span><span class="w">Offset</span></button>
-          <button class="tab" role="tab" id="tab-3" aria-controls="step-3" aria-selected="false" tabindex="-1"><span class="n">Step 3</span><span class="w">Fund</span></button>
+      <section class="steps" id="steps" data-ghl-section="02-hero-steps" aria-label="The four pieces">
+        <div class="tablist" role="tablist" aria-label="The four pieces">
+          <button class="tab" role="tab" id="tab-1" aria-controls="step-1" aria-selected="true" tabindex="0"><span class="n">Piece 1</span><span class="w">College planning</span></button>
+          <button class="tab" role="tab" id="tab-2" aria-controls="step-2" aria-selected="false" tabindex="-1"><span class="n">Piece 2</span><span class="w">Tax planning</span></button>
+          <button class="tab" role="tab" id="tab-3" aria-controls="step-3" aria-selected="false" tabindex="-1"><span class="n">Piece 3</span><span class="w">Real estate you own</span></button>
+          <button class="tab" role="tab" id="tab-4" aria-controls="step-4" aria-selected="false" tabindex="-1"><span class="n">Piece 4</span><span class="w">The long game</span></button>
         </div>
         <div class="panels" aria-live="off">
           <div class="panel" id="step-1" role="tabpanel" aria-labelledby="tab-1">
-            <h2 class="panel-h">STEP 1 · REDUCE</h2>
-            <p>Understand what college may really cost your family, including school choice and financial aid eligibility, before you decide how to pay.</p>
+            <h2 class="panel-h">PIECE 1 · COLLEGE PLANNING</h2>
+            <p>Reduce the true cost of college. Understand what it may really cost your family, including school choice and financial aid eligibility, before you decide how to pay.</p>
           </div>
           <div class="panel" id="step-2" role="tabpanel" aria-labelledby="tab-2">
-            <h2 class="panel-h">STEP 2 · OFFSET</h2>
-            <p>See how strategic tax planning could cover more of what's left, even if you're a W-2 earner. For some families, that includes real estate they own.</p>
+            <h2 class="panel-h">PIECE 2 · TAX PLANNING</h2>
+            <p>Offset the cost with tax planning, even on a W-2. See how it could cover more of what's left.</p>
           </div>
           <div class="panel" id="step-3" role="tabpanel" aria-labelledby="tab-3">
-            <h2 class="panel-h">STEP 3 · FUND</h2>
-            <p>Pay the balance without draining the savings and retirement money that should keep compounding for you.</p>
+            <h2 class="panel-h">PIECE 3 · REAL ESTATE YOU OWN</h2>
+            <p>One way tax planning can work: real estate you own, like a short-term rental.</p>
+          </div>
+          <div class="panel" id="step-4" role="tabpanel" aria-labelledby="tab-4">
+            <h2 class="panel-h">PIECE 4 · THE LONG GAME</h2>
+            <p>Fund college without sacrificing long-term wealth, and keep building wealth that lasts for the family.</p>
           </div>
         </div>
-        <div class="dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+        <div class="dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span></div>
       </section>
     </div>
   </div>
@@ -1330,7 +1335,7 @@
   var ROTATE_MS = 5000;
   var reduceMq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
 
-  // ---- Reduce / Offset / Fund tabs: auto-advance every 5s until the visitor uses a tab ----
+  // ---- four-piece tabs: auto-advance every 5s until the visitor uses a tab ----
   function initSteps(root) {
     if (!root || root.getAttribute('data-cfs-ready') === '1') return !!root;
     var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
